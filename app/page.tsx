@@ -10,12 +10,12 @@ import {
   Award,
   Clock,
   CheckCircle,
-  Phone,
 } from "lucide-react";
 import HeroSection from "./components/HeroSection";
 import ServiceCard from "./components/ServiceCard";
 import TestimonialCard from "./components/TestimonialCard";
 import CTAButton from "./components/CTAButton";
+import PhoneLink from "./components/PhoneLink";
 import { getFeaturedTestimonials } from "./data/testimonials";
 
 const featuredServices = [
@@ -307,13 +307,11 @@ export default function Home() {
             <CTAButton href="/free-estimate" variant="primary" size="lg">
               Get Free Estimate
             </CTAButton>
-            <a
-              href="tel:+12295551234"
+            <PhoneLink
+              location="homepage-cta"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--charcoal)] text-white rounded-sm font-semibold text-base hover:bg-[var(--charcoal-dark)] transition-colors"
-            >
-              <Phone className="w-5 h-5" />
-              (229) 555-1234
-            </a>
+              iconClassName="w-5 h-5"
+            />
           </div>
         </div>
       </section>

@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Calendar, Clock, ArrowLeft, Share2, Phone } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, Share2 } from "lucide-react";
 import HeroSection from "../../components/HeroSection";
 import CTAButton from "../../components/CTAButton";
+import PhoneLink from "../../components/PhoneLink";
 import {
   blogPosts,
   getBlogPostBySlug,
@@ -203,13 +204,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <CTAButton href="/free-estimate" variant="primary">
                     Get Free Estimate
                   </CTAButton>
-                  <a
-                    href="tel:+12295551234"
+                  <PhoneLink
+                    location="blog-post-cta"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 text-white rounded-lg font-semibold hover:bg-white/20 transition-colors"
-                  >
-                    <Phone className="w-4 h-4" />
-                    (229) 555-1234
-                  </a>
+                  />
                 </div>
               </div>
             </article>

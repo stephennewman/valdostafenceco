@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -66,6 +67,18 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <LocalBusinessSchema />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-MT4V9RR5WX"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-MT4V9RR5WX');
+          `}
+        </Script>
       </head>
       <body className={`${dmSerif.variable} ${jakarta.variable} antialiased`}>
         <Header />

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin, Clock } from "lucide-react";
+import PhoneLink from "./PhoneLink";
 
 const services = [
   { name: "Wood Fencing", href: "/services/wood-fence" },
@@ -54,13 +55,11 @@ export default function Footer() {
               honest service since day one.
             </p>
             <div className="space-y-3">
-              <a
-                href="tel:+12295551234"
+              <PhoneLink
+                location="footer"
                 className="flex items-center gap-3 text-white/70 hover:text-white transition-colors text-sm"
-              >
-                <Phone className="w-4 h-4 text-[var(--red-light)]" />
-                (229) 555-1234
-              </a>
+                iconClassName="w-4 h-4 text-[var(--red-light)]"
+              />
               <a
                 href="mailto:info@valdostafenceco.com"
                 className="flex items-center gap-3 text-white/70 hover:text-white transition-colors text-sm"

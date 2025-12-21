@@ -1,10 +1,11 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { MapPin, ArrowLeft, CheckCircle, Phone } from "lucide-react";
+import { MapPin, ArrowLeft, CheckCircle } from "lucide-react";
 import HeroSection from "../../components/HeroSection";
 import CTAButton from "../../components/CTAButton";
 import ServiceCard from "../../components/ServiceCard";
+import PhoneLink from "../../components/PhoneLink";
 import { areas, getAreaBySlug, getAllAreaSlugs } from "../../data/areas";
 import { services } from "../../data/services";
 
@@ -196,13 +197,10 @@ export default async function AreaPage({ params }: AreaPageProps) {
                 </CTAButton>
                 <div className="mt-4 text-center">
                   <span className="text-white/60 text-sm">or call us</span>
-                  <a
-                    href="tel:+12295551234"
+                  <PhoneLink
+                    location="area-page-sidebar"
                     className="flex items-center justify-center gap-2 mt-2 text-[var(--golden-amber)] font-semibold hover:text-[var(--golden-amber-light)]"
-                  >
-                    <Phone className="w-4 h-4" />
-                    (229) 555-1234
-                  </a>
+                  />
                 </div>
               </div>
 

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import HeroSection from "../components/HeroSection";
 import ContactForm from "../components/ContactForm";
+import PhoneLink from "../components/PhoneLink";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -113,13 +114,12 @@ export default function ContactPage() {
                   Sometimes it&apos;s easier to just pick up the phone. We&apos;re happy to
                   discuss your project and answer any questions.
                 </p>
-                <a
-                  href="tel:+12295551234"
+                <PhoneLink
+                  location="contact-sidebar"
                   className="inline-flex items-center gap-2 bg-[var(--golden-amber)] text-[var(--forest-green-dark)] px-4 py-2 rounded-lg font-semibold hover:bg-[var(--golden-amber-light)] transition-colors"
                 >
-                  <Phone className="w-4 h-4" />
                   Call Now
-                </a>
+                </PhoneLink>
               </div>
             </div>
           </div>

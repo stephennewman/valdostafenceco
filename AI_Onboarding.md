@@ -45,15 +45,24 @@ A public-facing website for Valdosta Fence Co - a local, family-owned fence comp
 - Optimized fonts via next/font
 - Static site generation for performance
 
-## Brand Colors
-- Forest Green: #1B4332 (primary)
-- Cedar Brown: #8B5A2B (secondary)
-- Golden Amber: #D4A03D (accent/CTAs)
-- Off-White: #FAFAF8 (background)
+## Brand Colors (Updated)
+- Red: rgb(139, 45, 50) (primary/accent)
+- Charcoal Dark: rgb(74, 74, 74) (headings/text)
+- Charcoal Deep: rgb(45, 45, 45) (dark sections)
+- White: #FFFFFF (backgrounds)
+- Gray: rgb(150, 150, 150) (muted text)
 
 ---
 
 ## Activity Log
+
+### Saturday, December 20, 2025 - 9:11 PM EST
+**Deploy #1 - Full Site + Color Fixes**
+- Deployed 33 files to GitHub/Vercel
+- Fixed About page "Why Local Matters" section - updated old green/gold colors to new red/charcoal palette
+- Fixed Reviews page stats bar - labels now visible (changed from 80% opacity to solid white)
+- Updated color palette from green/gold to red/charcoal/white (Redfern-inspired)
+- Commit: bcf82db
 
 ### Saturday, December 20, 2025 - 9:15 PM EST
 **Complete Website Build**

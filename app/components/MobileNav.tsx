@@ -2,8 +2,9 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { X, Phone, Mail } from "lucide-react";
+import { X, Mail } from "lucide-react";
 import CTAButton from "./CTAButton";
+import PhoneLink from "./PhoneLink";
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -76,13 +77,11 @@ export default function MobileNav({
 
           {/* Contact Info */}
           <div className="p-4 border-t border-[var(--border)] space-y-4">
-            <a
-              href="tel:+12295551234"
+            <PhoneLink
+              location="mobile-nav"
               className="flex items-center gap-3 text-[var(--charcoal)] hover:text-[var(--red)]"
-            >
-              <Phone className="w-5 h-5 text-[var(--red)]" />
-              <span>(229) 555-1234</span>
-            </a>
+              iconClassName="w-5 h-5 text-[var(--red)]"
+            />
             <a
               href="mailto:info@valdostafenceco.com"
               className="flex items-center gap-3 text-[var(--charcoal)] hover:text-[var(--red)]"

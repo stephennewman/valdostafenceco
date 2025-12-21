@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle, ArrowRight, ArrowLeft, Phone } from "lucide-react";
+import { CheckCircle, ArrowRight, ArrowLeft } from "lucide-react";
 import HeroSection from "../components/HeroSection";
 import CTAButton from "../components/CTAButton";
+import PhoneLink from "../components/PhoneLink";
 
 const propertyTypes = [
   { id: "residential", label: "Residential", description: "Home or personal property" },
@@ -126,13 +127,11 @@ export default function FreeEstimatePage() {
             <p className="text-[var(--foreground-muted)] mb-6">
               Need to talk sooner? Give us a call:
             </p>
-            <a
-              href="tel:+12295551234"
+            <PhoneLink
+              location="estimate-thank-you"
               className="inline-flex items-center gap-2 text-[var(--golden-amber-dark)] font-semibold text-lg"
-            >
-              <Phone className="w-5 h-5" />
-              (229) 555-1234
-            </a>
+              iconClassName="w-5 h-5"
+            />
           </div>
         </section>
       </>

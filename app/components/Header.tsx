@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, Phone } from "lucide-react";
+import { Menu } from "lucide-react";
 import CTAButton from "./CTAButton";
 import MobileNav from "./MobileNav";
+import PhoneLink from "./PhoneLink";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -26,13 +27,12 @@ export default function Header() {
         <div className="bg-[var(--charcoal)] text-white py-2 px-4">
           <div className="max-w-7xl mx-auto flex justify-between items-center text-sm">
             <span className="text-white/80">Serving Valdosta & 25 Miles Surrounding</span>
-            <a
-              href="tel:+12295551234"
+            <PhoneLink
+              location="header-topbar"
               className="flex items-center gap-2 hover:text-[var(--red-light)] transition-colors font-medium"
             >
-              <Phone className="w-4 h-4" />
               <span className="hidden sm:inline">(229) 555-1234</span>
-            </a>
+            </PhoneLink>
           </div>
         </div>
 
@@ -93,13 +93,13 @@ export default function Header() {
 
       {/* Mobile Sticky CTA */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-[var(--border)] p-3 flex gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
-        <a
-          href="tel:+12295551234"
+        <PhoneLink
+          location="mobile-sticky-cta"
           className="flex-1 flex items-center justify-center gap-2 py-3 bg-[var(--charcoal)] text-white rounded-sm font-semibold"
+          iconClassName="w-5 h-5"
         >
-          <Phone className="w-5 h-5" />
           Call Now
-        </a>
+        </PhoneLink>
         <CTAButton href="/free-estimate" variant="primary" className="flex-1">
           Free Estimate
         </CTAButton>
