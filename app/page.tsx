@@ -206,10 +206,10 @@ export default function Home() {
                   Service Area
                 </span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-[var(--font-serif)] text-white/80 mb-4">
+              <h2 className="text-3xl sm:text-4xl font-[var(--font-serif)] text-white mb-4">
                 Proudly Serving Valdosta & 25 Miles Surrounding
               </h2>
-              <p className="text-white/70 mb-8 leading-relaxed">
+              <p className="text-white/90 mb-8 leading-relaxed">
                 From Hahira to Lake Park, Quitman to Lakeland – if you&apos;re within 25
                 miles of Valdosta, we&apos;ve got you covered. Same great service, same
                 quality craftsmanship, no matter where you are in our service area.
@@ -217,7 +217,7 @@ export default function Home() {
 
               <ul className="grid grid-cols-2 gap-3 mb-8">
                 {serviceAreas.map((area) => (
-                  <li key={area} className="flex items-center gap-2 text-white/80 text-sm">
+                  <li key={area} className="flex items-center gap-2 text-white text-sm">
                     <CheckCircle className="w-4 h-4 text-[var(--red-light)]" />
                     {area}
                   </li>
