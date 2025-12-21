@@ -40,15 +40,13 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-full border-2 border-[var(--charcoal)] flex items-center justify-center group-hover:border-[var(--red)] transition-colors">
-                <span className="text-[var(--red)] font-bold text-lg">V</span>
+            <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-[var(--charcoal)] flex items-center justify-center group-hover:border-[var(--red)] transition-colors flex-shrink-0">
+                <span className="text-[var(--red)] font-bold text-base sm:text-lg">V</span>
               </div>
-              <div className="hidden sm:block">
-                <span className="font-[var(--font-serif)] text-xl text-[var(--charcoal)] tracking-tight">
-                  Valdosta Fence Co
-                </span>
-              </div>
+              <span className="font-[var(--font-serif)] text-base sm:text-xl text-[var(--charcoal)] tracking-tight">
+                Valdosta Fence Co
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
