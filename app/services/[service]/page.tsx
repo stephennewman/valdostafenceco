@@ -230,7 +230,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </h2>
           <p className="text-white/90 mb-8">
             Free estimates, honest pricing, and quality craftsmanship – that&apos;s
-            the Valdosta Fence Co difference.
+            the Valdosta Fence Co. difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <CTAButton href="/free-estimate" variant="primary" size="lg">

@@ -276,11 +276,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             datePublished: post.date,
             author: {
               "@type": "Organization",
-              name: "Valdosta Fence Co",
+              name: "Valdosta Fence Co.",
             },
             publisher: {
               "@type": "Organization",
-              name: "Valdosta Fence Co",
+              name: "Valdosta Fence Co.",
             },
           }),
         }}

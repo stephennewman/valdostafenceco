@@ -26,7 +26,7 @@ const faqCategories = [
       {
         question: "How long have you been in business?",
         answer:
-          "Valdosta Fence Co is a family-owned business proudly serving South Georgia. We've completed hundreds of fence installations throughout the area and continue to grow through word-of-mouth referrals from satisfied customers.",
+          "Valdosta Fence Co. is a family-owned business proudly serving South Georgia. We've completed hundreds of fence installations throughout the area and continue to grow through word-of-mouth referrals from satisfied customers.",
       },
       {
         question: "Do you offer free estimates?",

@@ -45,7 +45,7 @@ export default function Header() {
                 <span className="text-[var(--red)] font-bold text-base sm:text-lg">V</span>
               </div>
               <span className="font-[var(--font-serif)] text-base sm:text-xl text-[var(--charcoal)] tracking-tight">
-                Valdosta Fence Co
+                Valdosta Fence Co.
               </span>
             </Link>
 

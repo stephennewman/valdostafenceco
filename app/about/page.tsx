@@ -6,7 +6,7 @@ import CTAButton from "../components/CTAButton";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Valdosta Fence Co is a local, family-owned fence company serving Valdosta, GA and surrounding areas. Learn about our commitment to quality craftsmanship and community.",
+    "Valdosta Fence Co. is a local, family-owned fence company serving Valdosta, GA and surrounding areas. Learn about our commitment to quality craftsmanship and community.",
 };
 
 const values = [
@@ -63,7 +63,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-[var(--gray)]">
                 <p>
-                  Valdosta Fence Co started with a simple belief: homeowners and
+                  Valdosta Fence Co. started with a simple belief: homeowners and
                   businesses deserve a fence contractor they can trust. Too often,
                   we heard stories of contractors who didn&apos;t show up, cut corners,
                   or disappeared after cashing the check.
@@ -80,7 +80,7 @@ export default function AboutPage() {
                   time to do the job right. No shortcuts, no surprises, no excuses.
                 </p>
                 <p className="font-semibold text-[var(--charcoal-dark)]">
-                  When you hire Valdosta Fence Co, you&apos;re not just getting a fence
+                  When you hire Valdosta Fence Co., you&apos;re not just getting a fence
                   – you&apos;re getting our word that it will be done right.
                 </p>
               </div>
@@ -207,7 +207,7 @@ export default function AboutPage() {
             Ready to Work With Us?
           </h2>
           <p className="text-xl text-white/80 mb-8">
-            Experience the Valdosta Fence Co difference. Get a free estimate and
+            Experience the Valdosta Fence Co. difference. Get a free estimate and
             see why your neighbors trust us with their fencing needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

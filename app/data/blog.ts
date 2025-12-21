@@ -68,7 +68,7 @@ To give you a real-world idea:
 
 ### Getting an Accurate Quote
 
-Every property is different. The best way to know your actual cost is to get a free estimate from a local contractor who can assess your specific situation. At Valdosta Fence Co, we provide detailed, itemized quotes at no cost – no surprises, no hidden fees.
+Every property is different. The best way to know your actual cost is to get a free estimate from a local contractor who can assess your specific situation. At Valdosta Fence Co., we provide detailed, itemized quotes at no cost – no surprises, no hidden fees.
 
 ### Tips for Getting the Best Value
 
@@ -229,7 +229,7 @@ Georgia law requires pool fencing to:
 
 ### We Handle Permits for You
 
-At Valdosta Fence Co, we include permit handling as part of our service. We:
+At Valdosta Fence Co., we include permit handling as part of our service. We:
 - Research requirements for your specific property
 - Prepare and submit permit applications
 - Pay permit fees (included in your quote)

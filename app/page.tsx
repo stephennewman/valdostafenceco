@@ -128,7 +128,7 @@ export default function Home() {
               <span className="w-8 h-px bg-[var(--red)]" />
             </div>
             <h2 className="text-3xl sm:text-4xl font-[var(--font-serif)] text-[var(--charcoal-dark)] mb-4">
-              The Valdosta Fence Co Difference
+              The Valdosta Fence Co. Difference
             </h2>
             <p className="text-[var(--gray)] leading-relaxed">
               When you hire us, you get more than a fence – you get a commitment to quality from people who care about this community.

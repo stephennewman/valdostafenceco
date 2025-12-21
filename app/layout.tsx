@@ -21,8 +21,8 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Valdosta Fence Co | Local Family-Owned Fence Experts",
-    template: "%s | Valdosta Fence Co",
+    default: "Valdosta Fence Co. | Local Family-Owned Fence Experts",
+    template: "%s | Valdosta Fence Co.",
   },
   description:
     "Your local, family-owned fence experts serving Valdosta, GA and surrounding areas within 25 miles. Quality wood, vinyl, chain link, and custom fencing installation and repair.",
@@ -35,20 +35,20 @@ export const metadata: Metadata = {
     "local fence contractor",
     "family owned fence company",
   ],
-  authors: [{ name: "Valdosta Fence Co" }],
-  creator: "Valdosta Fence Co",
+  authors: [{ name: "Valdosta Fence Co." }],
+  creator: "Valdosta Fence Co.",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://valdostafenceco.com",
-    siteName: "Valdosta Fence Co",
-    title: "Valdosta Fence Co | Local Family-Owned Fence Experts",
+    siteName: "Valdosta Fence Co.",
+    title: "Valdosta Fence Co. | Local Family-Owned Fence Experts",
     description:
       "Quality fencing installation and repair in Valdosta, GA. Family-owned, locally trusted.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Valdosta Fence Co | Local Family-Owned Fence Experts",
+    title: "Valdosta Fence Co. | Local Family-Owned Fence Experts",
     description:
       "Quality fencing installation and repair in Valdosta, GA. Family-owned, locally trusted.",
   },

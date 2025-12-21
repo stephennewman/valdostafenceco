@@ -8,7 +8,7 @@ import { areas } from "../data/areas";
 export const metadata: Metadata = {
   title: "Service Areas",
   description:
-    "Valdosta Fence Co serves Valdosta, GA and surrounding areas within a 25-mile radius. See all the towns and communities we serve.",
+    "Valdosta Fence Co. serves Valdosta, GA and surrounding areas within a 25-mile radius. See all the towns and communities we serve.",
   keywords: [
     "fence company near me",
     "fence installation Valdosta GA",
@@ -182,7 +182,7 @@ export default function ServiceAreasPage() {
           </h2>
           <p className="text-lg text-[var(--gray)] mb-8 leading-relaxed">
             No matter where you are in our service area, you&apos;ll get the same
-            quality, professionalism, and fair pricing Valdosta Fence Co is known
+            quality, professionalism, and fair pricing Valdosta Fence Co. is known
             for.
           </p>
           <CTAButton href="/free-estimate" variant="primary" size="lg">

@@ -47,7 +47,7 @@ export default function Footer() {
                 <span className="text-[var(--red-light)] font-bold text-lg">V</span>
               </div>
               <span className="font-[var(--font-serif)] text-xl">
-                Valdosta Fence Co
+                Valdosta Fence Co.
               </span>
             </div>
             <p className="text-white/70 mb-6 text-sm leading-relaxed">

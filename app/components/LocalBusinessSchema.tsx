@@ -3,7 +3,7 @@ export default function LocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": "https://valdostafenceco.com",
-    name: "Valdosta Fence Co",
+    name: "Valdosta Fence Co.",
     description:
       "Local, family-owned fence company serving Valdosta, GA and surrounding areas within 25 miles. Professional installation of wood, vinyl, chain link, and aluminum fencing.",
     url: "https://valdostafenceco.com",

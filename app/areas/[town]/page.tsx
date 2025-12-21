@@ -29,7 +29,7 @@ export async function generateMetadata({
 
   return {
     title: `Fence Installation in ${area.name}, GA`,
-    description: `Professional fence installation and repair in ${area.name}, Georgia. Valdosta Fence Co serves ${area.name} and all of ${area.county}. Free estimates available.`,
+    description: `Professional fence installation and repair in ${area.name}, Georgia. Valdosta Fence Co. serves ${area.name} and all of ${area.county}. Free estimates available.`,
     keywords: [
       `fence installation ${area.name} GA`,
       `fence company ${area.name}`,
@@ -150,7 +150,7 @@ export default async function AreaPage({ params }: AreaPageProps) {
               {/* Why Choose Us for This Area */}
               <div className="bg-[var(--background-alt)] rounded-xl p-6">
                 <h3 className="text-xl font-[var(--font-serif)] text-[var(--forest-green)] mb-4">
-                  Why {area.name} Chooses Valdosta Fence Co
+                  Why {area.name} Chooses Valdosta Fence Co.
                 </h3>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
@@ -265,7 +265,7 @@ export default async function AreaPage({ params }: AreaPageProps) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
-            name: "Valdosta Fence Co",
+            name: "Valdosta Fence Co.",
             description: `Professional fence installation and repair services in ${area.name}, ${area.county}, Georgia.`,
             areaServed: {
               "@type": "City",
