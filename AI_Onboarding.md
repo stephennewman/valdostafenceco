@@ -56,6 +56,17 @@ A public-facing website for Valdosta Fence Co - a local, family-owned fence comp
 
 ## Activity Log
 
+### Saturday, December 20, 2025 - 9:45 PM EST
+**Deploy #3 - Sitemap & Robots.txt**
+- Created dynamic `sitemap.ts` with all 37 pages
+- Created `robots.ts` pointing to sitemap
+- Priority weighting: homepage (1.0), services/areas (0.8), blog (0.6)
+- Sitemap auto-updates when new pages are added
+- URLs:
+  - https://valdostafenceco.com/sitemap.xml
+  - https://valdostafenceco.com/robots.txt
+- Commit: d78c5c3
+
 ### Saturday, December 20, 2025 - 9:35 PM EST
 **Deploy #2 - Google Analytics Phone Click Tracking**
 - Added Google Analytics 4 (G-MT4V9RR5WX) to site
