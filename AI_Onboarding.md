@@ -56,6 +56,15 @@ A public-facing website for Valdosta Fence Co - a local, family-owned fence comp
 
 ## Activity Log
 
+### Saturday, December 20, 2025 - 9:35 PM EST
+**Deploy #2 - Google Analytics Phone Click Tracking**
+- Added Google Analytics 4 (G-MT4V9RR5WX) to site
+- Created `PhoneLink` component with click event tracking
+- Updated all 15+ phone links across site to use new component
+- Each click tracks location: header-topbar, mobile-sticky-cta, footer, mobile-nav, homepage-cta, contact-sidebar, estimate-thank-you, service-page-sidebar, area-page-sidebar, blog-post-cta
+- Events fire to GA4 as `phone_click` with `event_category: engagement`
+- Commit: b53181d
+
 ### Saturday, December 20, 2025 - 9:11 PM EST
 **Deploy #1 - Full Site + Color Fixes**
 - Deployed 33 files to GitHub/Vercel
