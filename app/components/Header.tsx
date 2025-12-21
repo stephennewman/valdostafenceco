@@ -1,0 +1,109 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, Phone } from "lucide-react";
+import CTAButton from "./CTAButton";
+import MobileNav from "./MobileNav";
+
+const navigation = [
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
+  { name: "Service Areas", href: "/service-areas" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "About", href: "/about" },
+  { name: "Reviews", href: "/reviews" },
+  { name: "Contact", href: "/contact" },
+];
+
+export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <>
+      <header className="sticky top-0 z-50 bg-white border-b border-[var(--border)]">
+        {/* Top Bar */}
+        <div className="bg-[var(--charcoal)] text-white py-2 px-4">
+          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm">
+            <span className="text-white/80">Serving Valdosta & 25 Miles Surrounding</span>
+            <a
+              href="tel:+12295551234"
+              className="flex items-center gap-2 hover:text-[var(--red-light)] transition-colors font-medium"
+            >
+              <Phone className="w-4 h-4" />
+              <span className="hidden sm:inline">(229) 555-1234</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Main Header */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 lg:h-20">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="w-10 h-10 rounded-full border-2 border-[var(--charcoal)] flex items-center justify-center group-hover:border-[var(--red)] transition-colors">
+                <span className="text-[var(--red)] font-bold text-lg">V</span>
+              </div>
+              <div className="hidden sm:block">
+                <span className="font-[var(--font-serif)] text-xl text-[var(--charcoal)] tracking-tight">
+                  Valdosta Fence Co
+                </span>
+              </div>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-8">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-[var(--charcoal)] hover:text-[var(--red)] transition-colors font-medium text-sm"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Desktop CTA */}
+            <div className="hidden lg:flex items-center gap-4">
+              <CTAButton href="/free-estimate" variant="primary">
+                Free Estimate
+              </CTAButton>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              type="button"
+              className="lg:hidden p-2 text-[var(--charcoal)] hover:text-[var(--red)] transition-colors"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Navigation */}
+      <MobileNav
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        navigation={navigation}
+      />
+
+      {/* Mobile Sticky CTA */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-[var(--border)] p-3 flex gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+        <a
+          href="tel:+12295551234"
+          className="flex-1 flex items-center justify-center gap-2 py-3 bg-[var(--charcoal)] text-white rounded-sm font-semibold"
+        >
+          <Phone className="w-5 h-5" />
+          Call Now
+        </a>
+        <CTAButton href="/free-estimate" variant="primary" className="flex-1">
+          Free Estimate
+        </CTAButton>
+      </div>
+    </>
+  );
+}
