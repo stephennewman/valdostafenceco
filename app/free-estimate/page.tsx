@@ -330,7 +330,7 @@ export default function FreeEstimatePage() {
                           required
                           value={formData.phone}
                           onChange={(e) => updateForm("phone", e.target.value)}
-                          placeholder="(229) 555-1234"
+                          placeholder="(229) 563-6488"
                           className="w-full px-4 py-3 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--golden-amber)]"
                         />
                       </div>

@@ -7,7 +7,7 @@ export default function LocalBusinessSchema() {
     description:
       "Local, family-owned fence company serving Valdosta, GA and surrounding areas within 25 miles. Professional installation of wood, vinyl, chain link, and aluminum fencing.",
     url: "https://valdostafenceco.com",
-    telephone: "+1-229-555-1234",
+    telephone: "+1-229-563-6488",
     email: "info@valdostafenceco.com",
     priceRange: "$$",
     currenciesAccepted: "USD",

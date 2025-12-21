@@ -60,7 +60,7 @@ export default async function AreaPage({ params }: AreaPageProps) {
         title={`Fence Services in ${area.name}, GA`}
         description={`Quality fence installation and repair for ${area.name} homes and businesses. Your local, family-owned fence experts.`}
         primaryCTA={{ text: "Get Free Estimate", href: "/free-estimate" }}
-        secondaryCTA={{ text: "Call Now", href: "tel:+12295551234" }}
+        secondaryCTA={{ text: "Call Now", href: "tel:+12295636488" }}
         size="md"
       />
 

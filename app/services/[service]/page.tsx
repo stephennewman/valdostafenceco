@@ -55,7 +55,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         title={`${serviceData.name} in Valdosta, GA`}
         description={serviceData.description}
         primaryCTA={{ text: "Get Free Estimate", href: "/free-estimate" }}
-        secondaryCTA={{ text: "Call Now", href: "tel:+12295551234" }}
+        secondaryCTA={{ text: "Call Now", href: "tel:+12295636488" }}
         size="md"
       />
 

@@ -31,7 +31,7 @@ export default function Header() {
               location="header-topbar"
               className="flex items-center gap-2 hover:text-[var(--red-light)] transition-colors font-medium"
             >
-              <span className="hidden sm:inline">(229) 555-1234</span>
+              <span className="hidden sm:inline">(229) 563-6488</span>
             </PhoneLink>
           </div>
         </div>

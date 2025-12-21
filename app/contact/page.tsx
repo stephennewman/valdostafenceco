@@ -7,15 +7,15 @@ import PhoneLink from "../components/PhoneLink";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Contact Valdosta Fence Co for a free estimate or to discuss your fencing project. Call (229) 555-1234 or fill out our contact form.",
+    "Contact Valdosta Fence Co for a free estimate or to discuss your fencing project. Call (229) 563-6488 or fill out our contact form.",
 };
 
 const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
-    value: "(229) 555-1234",
-    href: "tel:+12295551234",
+    value: "(229) 563-6488",
+    href: "tel:+12295636488",
     description: "Call us for immediate assistance",
   },
   {

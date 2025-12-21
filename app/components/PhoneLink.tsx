@@ -19,7 +19,7 @@ declare global {
 }
 
 export default function PhoneLink({
-  phoneNumber = "+12295551234",
+  phoneNumber = "+12295636488",
   location,
   children,
   className = "",
@@ -41,7 +41,7 @@ export default function PhoneLink({
       {children || (
         <>
           {showIcon && <Phone className={iconClassName} />}
-          <span>(229) 555-1234</span>
+          <span>(229) 563-6488</span>
         </>
       )}
     </a>
