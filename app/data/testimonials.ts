@@ -81,6 +81,15 @@ export const testimonials: Testimonial[] = [
     service: "Commercial Fencing",
     date: "2024-04",
   },
+  {
+    id: 9,
+    name: "Angela R.",
+    location: "Moultrie, GA",
+    rating: 5,
+    text: "We had an old rotting fence that was an eyesore. Valdosta Fence Co. removed it and installed a gorgeous new wood privacy fence that completely transformed our backyard. The crew was respectful, efficient, and left our yard spotless. Worth every penny!",
+    service: "Privacy Fence Installation",
+    date: "2024-03",
+  },
 ];
 
 export function getFeaturedTestimonials(count: number = 4): Testimonial[] {

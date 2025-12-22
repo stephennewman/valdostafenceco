@@ -48,13 +48,6 @@ export default function ReviewsPage() {
             </div>
             <div className="h-px w-24 md:h-24 md:w-px bg-white/20" />
             <div className="text-center">
-              <div className="text-4xl font-bold text-[var(--red)]">
-                {testimonials.length}+
-              </div>
-              <p className="text-white text-sm font-medium">Happy Customers</p>
-            </div>
-            <div className="h-px w-24 md:h-24 md:w-px bg-white/20" />
-            <div className="text-center">
               <div className="text-4xl font-bold text-[var(--red)]">100%</div>
               <p className="text-white text-sm font-medium">Would Recommend</p>
             </div>

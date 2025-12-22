@@ -10,7 +10,6 @@ import PhoneLink from "./PhoneLink";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
-  { name: "Service Areas", href: "/service-areas" },
   { name: "Gallery", href: "/gallery" },
   { name: "About", href: "/about" },
   { name: "Reviews", href: "/reviews" },
