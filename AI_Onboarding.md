@@ -56,6 +56,32 @@ A public-facing website for Valdosta Fence Co - a local, family-owned fence comp
 
 ## Activity Log
 
+### Monday, December 22, 2025 - 11:59 PM EST
+**Deploy #6 - Smart Scheduling Widget with Lead Scoring**
+- **Feature**: Added intelligent scheduling widget to estimate form that shows availability based on lead value
+- **Lead Scoring Algorithm** (0-100 points):
+  - Property Type: Residential (10), Farm/Ranch (18), Commercial (20)
+  - Fence Type: Repair (5), Gate (8), Chain-Link (12), Wood (18), Privacy (20), Vinyl/Aluminum (25), Farm (30)
+  - Fence Length: Under 100ft (5), 100-250ft (15), 250-500ft (25), 500+ ft (35)
+  - Timeline: Planning (2), 3 months (5), Month (10), ASAP (15)
+- **Priority Tiers**:
+  - 🔥 HIGH (70+): "Priority Scheduling" - dates available this week
+  - ⚡ MEDIUM (45-69): "Standard Scheduling" - dates available next week
+  - 📋 LOW (<45): "Flexible Scheduling" - dates available 2+ weeks out
+- **New Form Step**: Added "How much fencing do you need?" step with structured length options
+- **UI Features**: 
+  - Priority badge (green/amber/gray) based on lead score
+  - Date picker with 2-hour time windows
+  - "Skip - Call me instead" option
+  - Confirmation box shows selected appointment
+- **Email Updates**: Lead emails now include priority badge, score, and scheduled appointment if selected
+- **Files Added**:
+  - `app/utils/leadScoring.ts` - Lead scoring algorithm
+  - `app/components/SchedulingWidget.tsx` - Scheduling UI component
+- **Files Updated**:
+  - `app/free-estimate/page.tsx` - 6-step form with scheduling integration
+  - `app/api/estimate/route.ts` - Enhanced email with scoring data
+
 ### Monday, December 22, 2025 - 11:55 PM EST
 **Deploy #5 - Site Cleanup**
 - Removed "Service Areas" from main navigation (cleaner nav, page still accessible)
