@@ -11,6 +11,21 @@ A public-facing website for Valdosta Fence Co - a local, family-owned fence comp
 - **Utilities**: clsx (conditional classnames)
 - **Language**: TypeScript 5
 - **Fonts**: DM Serif Display (headings), Plus Jakarta Sans (body)
+- **Database**: Supabase (PostgreSQL)
+- **Email**: Resend
+
+## Environment Variables
+Add these to your `.env.local` for local dev and to Vercel for production:
+
+```bash
+# Supabase (uses v7-form-builder project - VFC tables are isolated with vfc_ prefix)
+NEXT_PUBLIC_SUPABASE_URL=https://xsncgdnctnbzvokmxlex.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<your_anon_key>
+
+# Email (Resend)
+RESEND_API_KEY=<your_resend_api_key>
+LEADS_EMAIL=<your_business_email>
+```
 
 ## Key Directories
 - `/app` - Next.js App Router pages and layouts
@@ -55,6 +70,25 @@ A public-facing website for Valdosta Fence Co - a local, family-owned fence comp
 ---
 
 ## Activity Log
+
+### Tuesday, December 23, 2025 - 12:30 AM EST
+**Deploy #8 - Supabase Integration: Lead Database**
+- **Feature**: Connected to Supabase for persistent lead storage and tracking
+- **Database**: Using `v7-form-builder` project with isolated `vfc_` prefixed tables
+- **Tables Created**:
+  - `vfc_leads` - All form submissions with lead scoring, status pipeline
+  - `vfc_appointments` - Scheduled site visits linked to leads
+  - `vfc_lead_history` - Automatic status change tracking (trigger-based)
+- **Lead Fields**: name, phone, email, address, city, property_type, fence_type, fence_length, timeline, notes, lead_score, lead_priority, estimated_value, status, scheduled_date, scheduled_time
+- **Pipeline Statuses**: new → contacted → quoted → won/lost/cancelled
+- **RLS Policies**: Public insert allowed (anonymous forms), authenticated read/update (admin dashboard)
+- **Auto-triggers**: updated_at on row changes, status history logging
+- **API Update**: Estimate form now saves to Supabase before sending emails
+- **Files Added**:
+  - `app/utils/supabase.ts` - Supabase client + VFC type definitions
+- **Files Updated**:
+  - `app/api/estimate/route.ts` - Saves lead to DB, returns leadId in response
+  - `package.json` - Added @supabase/supabase-js
 
 ### Tuesday, December 23, 2025 - 12:15 AM EST
 **Deploy #7 - Dual Email Track: Business Alerts + Customer Confirmations**

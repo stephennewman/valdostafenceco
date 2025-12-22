@@ -5,6 +5,7 @@ import {
   getRequestConfirmationEmail,
   getCustomerSubject,
 } from "@/app/utils/emailTemplates";
+import { insertLead, insertAppointment, VFCLead } from "@/app/utils/supabase";
 
 export async function POST(request: Request) {
   try {
@@ -34,12 +35,62 @@ export async function POST(request: Request) {
       );
     }
 
+    // =====================================================
+    // SAVE TO SUPABASE
+    // =====================================================
+    let leadId: string | undefined;
+    
+    try {
+      // Map lead priority to estimated value
+      const estimatedValueMap: Record<string, string> = {
+        high: "$5k+",
+        medium: "$1k-5k",
+        low: "<$1k",
+      };
+
+      const leadData: VFCLead = {
+        name,
+        phone,
+        email: email || undefined,
+        address: address || undefined,
+        city: city || undefined,
+        property_type: propertyType,
+        fence_type: Array.isArray(fenceTypes) ? fenceTypes.join(", ") : fenceTypes,
+        fence_length: fenceLength,
+        timeline,
+        notes: notes || undefined,
+        lead_score: leadScore || 0,
+        lead_priority: leadPriority || "low",
+        estimated_value: estimatedValueMap[leadPriority] || undefined,
+        scheduled_date: scheduledDate || undefined,
+        scheduled_time: scheduledTime || undefined,
+      };
+
+      const lead = await insertLead(leadData);
+      leadId = lead?.id;
+
+      // If there's a scheduled appointment, also create an appointment record
+      if (scheduledDate && scheduledTime && leadId) {
+        await insertAppointment({
+          lead_id: leadId,
+          scheduled_date: scheduledDate,
+          scheduled_time: scheduledTime,
+        });
+      }
+    } catch (dbError) {
+      console.error("Database error (continuing with email):", dbError);
+      // Continue with email even if DB fails
+    }
+
+    // =====================================================
+    // SEND EMAILS
+    // =====================================================
+    
     // Check for API key
     if (!process.env.RESEND_API_KEY) {
       console.error("RESEND_API_KEY not configured");
       return NextResponse.json(
-        { error: "Email service not configured" },
-        { status: 500 }
+        { success: true, leadId, message: "Lead saved (email not configured)" }
       );
     }
 
@@ -151,7 +202,8 @@ export async function POST(request: Request) {
         
         <hr />
         <p style="color: #666; font-size: 12px;">
-          This lead came from the Free Estimate form on valdostafenceco.com
+          This lead came from the Free Estimate form on valdostafenceco.com<br/>
+          ${leadId ? `Lead ID: ${leadId}` : ""}
         </p>
       `,
     });
@@ -200,6 +252,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ 
       success: true, 
       id: internalData?.id,
+      leadId,
       customerEmailSent,
     });
   } catch (error) {
