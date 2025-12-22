@@ -34,12 +34,31 @@ export default function ContactForm({
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In production, this would send to an API
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please call us at (229) 563-6488.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (
@@ -188,8 +207,14 @@ export default function ContactForm({
         />
       </div>
 
-      <CTAButton type="submit" variant="primary" fullWidth>
-        Send Message
+      {error && (
+        <p className="text-red-600 text-sm text-center bg-red-50 p-3 rounded-lg">
+          {error}
+        </p>
+      )}
+
+      <CTAButton type="submit" variant="primary" fullWidth disabled={isLoading}>
+        {isLoading ? "Sending..." : "Send Message"}
       </CTAButton>
 
       <p className="text-xs text-[var(--foreground-muted)] text-center">

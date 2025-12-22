@@ -43,18 +43,50 @@ export default function FreeEstimatePage() {
     phone: "",
     email: "",
     address: "",
+    city: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const updateForm = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/estimate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          propertyType: formData.propertyType,
+          fenceTypes: formData.fenceType,
+          timeline: formData.timeline,
+          fenceLength: formData.fenceLength,
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          address: formData.address,
+          city: formData.city,
+          notes: formData.message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send request");
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please call us at (229) 563-6488.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const canProceed = () => {
@@ -346,17 +378,31 @@ export default function FreeEstimatePage() {
                         className="w-full px-4 py-3 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--golden-amber)]"
                       />
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
-                        Property Address
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.address}
-                        onChange={(e) => updateForm("address", e.target.value)}
-                        placeholder="123 Main St, Valdosta, GA"
-                        className="w-full px-4 py-3 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--golden-amber)]"
-                      />
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
+                          Property Address
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.address}
+                          onChange={(e) => updateForm("address", e.target.value)}
+                          placeholder="123 Main St"
+                          className="w-full px-4 py-3 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--golden-amber)]"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
+                          City
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.city}
+                          onChange={(e) => updateForm("city", e.target.value)}
+                          placeholder="Valdosta"
+                          className="w-full px-4 py-3 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--golden-amber)]"
+                        />
+                      </div>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
@@ -401,9 +447,16 @@ export default function FreeEstimatePage() {
                   <ArrowRight className="w-4 h-4" />
                 </button>
               ) : (
-                <CTAButton type="submit" variant="primary" size="lg">
-                  Submit Request
-                </CTAButton>
+                <div className="flex flex-col items-end gap-2">
+                  {error && (
+                    <p className="text-red-600 text-sm bg-red-50 p-3 rounded-lg">
+                      {error}
+                    </p>
+                  )}
+                  <CTAButton type="submit" variant="primary" size="lg" disabled={isLoading}>
+                    {isLoading ? "Submitting..." : "Submit Request"}
+                  </CTAButton>
+                </div>
               )}
             </div>
           </form>

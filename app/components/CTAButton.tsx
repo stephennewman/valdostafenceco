@@ -12,6 +12,7 @@ interface CTAButtonProps {
   className?: string;
   type?: "button" | "submit";
   fullWidth?: boolean;
+  disabled?: boolean;
 }
 
 export default function CTAButton({
@@ -23,6 +24,7 @@ export default function CTAButton({
   className,
   type = "button",
   fullWidth = false,
+  disabled = false,
 }: CTAButtonProps) {
   const baseStyles =
     "inline-flex items-center justify-center font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
@@ -47,6 +49,7 @@ export default function CTAButton({
     variants[variant],
     sizes[size],
     fullWidth && "w-full",
+    disabled && "opacity-50 cursor-not-allowed",
     className
   );
 
@@ -59,7 +62,7 @@ export default function CTAButton({
   }
 
   return (
-    <button type={type} onClick={onClick} className={classes}>
+    <button type={type} onClick={onClick} disabled={disabled} className={classes}>
       {children}
     </button>
   );
