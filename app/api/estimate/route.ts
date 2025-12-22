@@ -170,7 +170,7 @@ export async function POST(request: Request) {
     // EMAIL 1: Internal notification to business
     // =====================================================
     const { data: internalData, error: internalError } = await resend.emails.send({
-      from: "Valdosta Fence Co. <onboarding@resend.dev>",
+      from: "Valdosta Fence Co. <stephen@valdostafenceco.com>",
       to: [process.env.LEADS_EMAIL || "info@valdostafenceco.com"],
       replyTo: email || undefined,
       subject: `${subjectEmoji} ${priorityBadge}${appointmentTag} - ${name} in ${city || "Valdosta"}`,
@@ -235,7 +235,7 @@ export async function POST(request: Request) {
           });
 
       const { error: customerError } = await resend.emails.send({
-        from: "Valdosta Fence Co. <onboarding@resend.dev>",
+        from: "Valdosta Fence Co. <stephen@valdostafenceco.com>",
         to: [email],
         subject: customerSubject,
         html: customerHtml,

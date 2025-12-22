@@ -249,3 +249,4 @@ export function getCustomerSubject(hasAppointment: boolean, name: string): strin
   return `✓ We Got Your Request, ${name}! - Valdosta Fence Co.`;
 }
 
+
