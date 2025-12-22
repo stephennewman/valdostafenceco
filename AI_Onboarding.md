@@ -56,6 +56,20 @@ A public-facing website for Valdosta Fence Co - a local, family-owned fence comp
 
 ## Activity Log
 
+### Monday, December 22, 2025 - 11:45 PM EST
+**Deploy #4 - Critical SEO Fix: Canonical URLs**
+- **Issue**: Google Search Console was selecting wrong canonical URL (kvc.co.th - unrelated Thai website)
+- **Root cause**: Missing explicit canonical URLs allowed Google to incorrectly infer canonicals
+- **Fix implemented**:
+  - Added `metadataBase: new URL("https://valdostafenceco.com")` to root layout
+  - Added `alternates.canonical` to ALL 37 pages
+  - Created layout.tsx files for client components (free-estimate, gallery) to add metadata
+  - Added `trailingSlash: false` to next.config.ts for URL consistency
+- **Files updated**: 14 files (layout.tsx, all page metadata files, next.config.ts)
+- **Result**: Every page now outputs `<link rel="canonical" href="https://valdostafenceco.com/...">` 
+- **Next steps**: Re-request indexing in Google Search Console
+- Commit: 78aac3b
+
 ### Saturday, December 20, 2025 - 9:45 PM EST
 **Deploy #3 - Sitemap & Robots.txt**
 - Created dynamic `sitemap.ts` with all 37 pages
