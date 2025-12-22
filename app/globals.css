@@ -82,6 +82,12 @@ img {
   height: auto;
 }
 
+/* Buttons should show pointer cursor */
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
