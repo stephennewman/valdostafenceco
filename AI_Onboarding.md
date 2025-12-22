@@ -56,6 +56,23 @@ A public-facing website for Valdosta Fence Co - a local, family-owned fence comp
 
 ## Activity Log
 
+### Tuesday, December 23, 2025 - 12:15 AM EST
+**Deploy #7 - Dual Email Track: Business Alerts + Customer Confirmations**
+- **Feature**: Added customer-facing confirmation emails alongside internal business notifications
+- **Two Email Tracks**:
+  1. **Internal (Business)**: Lead details, priority badge, score, contact info → LEADS_EMAIL
+  2. **Customer**: Branded confirmation email → customer's email address
+- **Customer Email Templates**:
+  - **Scheduled appointments**: "✓ Appointment Confirmed!" with date, time, location, what to expect
+  - **Non-scheduled requests**: "✓ Request Received!" with next steps (we'll call within 24 hours)
+- **Email Requirement**: Email is now required when scheduling an appointment (to receive confirmation)
+- **Branded Design**: Professional HTML emails with Valdosta Fence Co. branding (red #8B2D32 header, charcoal footer)
+- **Files Added**:
+  - `app/utils/emailTemplates.ts` - Customer email HTML templates
+- **Files Updated**:
+  - `app/api/estimate/route.ts` - Dual email sending logic
+  - `app/free-estimate/page.tsx` - Email required for scheduled appointments
+
 ### Monday, December 22, 2025 - 11:59 PM EST
 **Deploy #6 - Smart Scheduling Widget with Lead Scoring**
 - **Feature**: Added intelligent scheduling widget to estimate form that shows availability based on lead value

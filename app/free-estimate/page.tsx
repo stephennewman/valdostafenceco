@@ -144,7 +144,9 @@ export default function FreeEstimatePage() {
       case 5:
         return true; // Scheduling step - can skip
       case 6:
-        return formData.name !== "" && formData.phone !== "";
+        // Email required if they scheduled an appointment
+        const emailRequired = formData.scheduledDate ? formData.email !== "" : true;
+        return formData.name !== "" && formData.phone !== "" && emailRequired;
       default:
         return false;
     }
@@ -510,14 +512,21 @@ export default function FreeEstimatePage() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
-                        Email
+                        Email {formData.scheduledDate ? "*" : "(for confirmation)"}
                       </label>
                       <input
                         type="email"
+                        required={!!formData.scheduledDate}
                         value={formData.email}
                         onChange={(e) => updateForm("email", e.target.value)}
+                        placeholder="your@email.com"
                         className="w-full px-4 py-3 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--golden-amber)]"
                       />
+                      {formData.scheduledDate && (
+                        <p className="text-xs text-[var(--foreground-muted)] mt-1">
+                          Required to send your appointment confirmation
+                        </p>
+                      )}
                     </div>
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>

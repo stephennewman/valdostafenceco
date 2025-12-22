@@ -1,5 +1,10 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
+import {
+  getScheduledConfirmationEmail,
+  getRequestConfirmationEmail,
+  getCustomerSubject,
+} from "@/app/utils/emailTemplates";
 
 export async function POST(request: Request) {
   try {
@@ -44,6 +49,21 @@ export async function POST(request: Request) {
       ? fenceTypes.join(", ")
       : fenceTypes || "Not specified";
 
+    // Format fence type for display
+    const fenceTypeLabels: Record<string, string> = {
+      wood: "Wood Fence",
+      vinyl: "Vinyl Fence",
+      "chain-link": "Chain Link Fence",
+      aluminum: "Aluminum Fence",
+      privacy: "Privacy Fence",
+      pool: "Pool Fence",
+      farm: "Farm/Ranch Fencing",
+      repair: "Fence Repair",
+      gate: "Gate Installation",
+      unsure: "Fencing",
+    };
+    const fenceTypeDisplay = fenceTypeLabels[fenceTypes] || fenceTypesList;
+
     // Format fence length for display
     const fenceLengthLabels: Record<string, string> = {
       small: "Under 100 ft (Small)",
@@ -64,7 +84,9 @@ export async function POST(request: Request) {
 
     // Format scheduled date if present
     let scheduledInfo = "";
-    if (scheduledDate && scheduledTime) {
+    const hasAppointment = scheduledDate && scheduledTime;
+    
+    if (hasAppointment) {
       const date = new Date(scheduledDate);
       const formattedDate = date.toLocaleDateString("en-US", {
         weekday: "long",
@@ -91,13 +113,16 @@ export async function POST(request: Request) {
 
     // Subject line based on priority
     const subjectEmoji = leadPriority === "high" ? "🔥🔥🔥" : leadPriority === "medium" ? "⚡" : "📋";
-    const hasAppointment = scheduledDate ? " [SCHEDULED]" : "";
+    const appointmentTag = hasAppointment ? " [SCHEDULED]" : "";
 
-    const { data, error } = await resend.emails.send({
+    // =====================================================
+    // EMAIL 1: Internal notification to business
+    // =====================================================
+    const { data: internalData, error: internalError } = await resend.emails.send({
       from: "Valdosta Fence Co. <onboarding@resend.dev>",
       to: [process.env.LEADS_EMAIL || "info@valdostafenceco.com"],
       replyTo: email || undefined,
-      subject: `${subjectEmoji} ${priorityBadge}${hasAppointment} - ${name} in ${city || "Valdosta"}`,
+      subject: `${subjectEmoji} ${priorityBadge}${appointmentTag} - ${name} in ${city || "Valdosta"}`,
       html: `
         <h2>New Free Estimate Request</h2>
         
@@ -131,12 +156,52 @@ export async function POST(request: Request) {
       `,
     });
 
-    if (error) {
-      console.error("Resend error:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    if (internalError) {
+      console.error("Internal email error:", internalError);
+      // Continue - don't fail the whole request if internal email fails
     }
 
-    return NextResponse.json({ success: true, id: data?.id });
+    // =====================================================
+    // EMAIL 2: Customer confirmation (if email provided)
+    // =====================================================
+    let customerEmailSent = false;
+    
+    if (email) {
+      const customerSubject = getCustomerSubject(hasAppointment, name);
+      const customerHtml = hasAppointment
+        ? getScheduledConfirmationEmail({
+            name,
+            scheduledDate,
+            scheduledTime,
+            address,
+            city,
+            fenceType: fenceTypeDisplay,
+          })
+        : getRequestConfirmationEmail({
+            name,
+            fenceType: fenceTypeDisplay,
+          });
+
+      const { error: customerError } = await resend.emails.send({
+        from: "Valdosta Fence Co. <onboarding@resend.dev>",
+        to: [email],
+        subject: customerSubject,
+        html: customerHtml,
+      });
+
+      if (customerError) {
+        console.error("Customer email error:", customerError);
+        // Continue - don't fail the whole request if customer email fails
+      } else {
+        customerEmailSent = true;
+      }
+    }
+
+    return NextResponse.json({ 
+      success: true, 
+      id: internalData?.id,
+      customerEmailSent,
+    });
   } catch (error) {
     console.error("Estimate form error:", error);
     return NextResponse.json(
