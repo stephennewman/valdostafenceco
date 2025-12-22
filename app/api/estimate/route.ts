@@ -40,7 +40,7 @@ export async function POST(request: Request) {
       : fenceTypes || "Not specified";
 
     const { data, error } = await resend.emails.send({
-      from: "Valdosta Fence Co. <leads@valdostafenceco.com>",
+      from: "Valdosta Fence Co. <onboarding@resend.dev>",
       to: [process.env.LEADS_EMAIL || "info@valdostafenceco.com"],
       replyTo: email || undefined,
       subject: `🔥 New Estimate Request: ${name} - ${city || "Valdosta"}`,
