@@ -3,8 +3,6 @@ import {
   Fence,
   Link2,
   Shield,
-  Wrench,
-  DoorOpen,
   Users,
   MapPin,
   Award,
@@ -46,20 +44,6 @@ const featuredServices = [
       "Elegant, rust-free fencing with the classic look of wrought iron.",
     href: "/services/aluminum-fence",
     icon: Shield,
-  },
-  {
-    title: "Fence Repair",
-    description:
-      "Expert repairs for storm damage, rot, leaning posts, and more.",
-    href: "/services/fence-repair",
-    icon: Wrench,
-  },
-  {
-    title: "Gate Installation",
-    description:
-      "Custom gates from simple walk-throughs to automated driveway entrances.",
-    href: "/services/gate-installation",
-    icon: DoorOpen,
   },
 ];
 
@@ -175,7 +159,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredServices.map((service) => (
               <ServiceCard
                 key={service.title}
@@ -206,7 +190,7 @@ export default function Home() {
                   Service Area
                 </span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-[var(--font-serif)] text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-[var(--font-serif)] text-white/80 mb-4">
                 Proudly Serving Valdosta & 25 Miles Surrounding
               </h2>
               <p className="text-white/90 mb-8 leading-relaxed">

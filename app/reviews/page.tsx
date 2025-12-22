@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Customer Reviews",
   description:
     "Read what our customers say about Valdosta Fence Co. Real reviews from homeowners and businesses throughout South Georgia.",
+  alternates: {
+    canonical: "/reviews",
+  },
 };
 
 export default function ReviewsPage() {

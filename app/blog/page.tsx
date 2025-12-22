@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Fencing tips, guides, and insights from Valdosta Fence Co. Learn about fence materials, costs, maintenance, and local requirements in South Georgia.",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 const categories = Array.from(new Set(blogPosts.map((p) => p.category)));

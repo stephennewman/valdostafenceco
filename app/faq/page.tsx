@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
     "Common questions about fence installation, materials, pricing, and more. Get answers from Valdosta Fence Co.",
+  alternates: {
+    canonical: "/faq",
+  },
 };
 
 const faqCategories = [

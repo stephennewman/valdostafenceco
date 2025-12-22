@@ -20,6 +20,10 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://valdostafenceco.com"),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "Valdosta Fence Co. | Local Family-Owned Fence Experts",
     template: "%s | Valdosta Fence Co.",

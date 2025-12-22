@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "About Us",
   description:
     "Valdosta Fence Co. is a local, family-owned fence company serving Valdosta, GA and surrounding areas. Learn about our commitment to quality craftsmanship and community.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 const values = [

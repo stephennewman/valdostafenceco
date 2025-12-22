@@ -36,6 +36,9 @@ export async function generateMetadata({
       `fence contractor ${area.county}`,
       `${area.name} Georgia fencing`,
     ],
+    alternates: {
+      canonical: `/areas/${town}`,
+    },
   };
 }
 

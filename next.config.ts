@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Enforce trailing slash consistency for SEO
+  trailingSlash: false,
 };
 
 export default nextConfig;

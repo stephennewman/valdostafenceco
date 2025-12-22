@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "vinyl fence installation",
     "fence repair Valdosta GA",
   ],
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 export default function ServicesPage() {

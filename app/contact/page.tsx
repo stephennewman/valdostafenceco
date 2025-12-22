@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Contact Us",
   description:
     "Contact Valdosta Fence Co. for a free estimate or to discuss your fencing project. Call (229) 563-6488 or fill out our contact form.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 const contactInfo = [

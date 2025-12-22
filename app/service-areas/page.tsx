@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     "fence service Lake Park",
     "South Georgia fence company",
   ],
+  alternates: {
+    canonical: "/service-areas",
+  },
 };
 
 export default function ServiceAreasPage() {

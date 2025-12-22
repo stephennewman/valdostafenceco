@@ -23,6 +23,7 @@ export interface Service {
   features: string[];
   faqs: { question: string; answer: string }[];
   keywords: string[];
+  galleryImages?: string[];
 }
 
 export const services: Service[] = [
@@ -74,6 +75,7 @@ export const services: Service[] = [
       "privacy fence Valdosta",
       "cedar fence Georgia",
     ],
+    galleryImages: ["/valdostafenceco_11.png"],
   },
   {
     slug: "vinyl-fence",
