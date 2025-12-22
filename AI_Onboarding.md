@@ -56,6 +56,14 @@ A public-facing website for Valdosta Fence Co - a local, family-owned fence comp
 
 ## Activity Log
 
+### Monday, December 22, 2025 - 11:55 PM EST
+**Deploy #5 - Site Cleanup**
+- Removed "Service Areas" from main navigation (cleaner nav, page still accessible)
+- Removed "8+ Happy Customers" stat from Reviews page summary section
+- Added 9th customer review (Angela R. from Moultrie, GA - Privacy Fence Installation)
+- Reviews page now shows 9 testimonials
+- Commit: cfed774
+
 ### Monday, December 22, 2025 - 11:45 PM EST
 **Deploy #4 - Critical SEO Fix: Canonical URLs**
 - **Issue**: Google Search Console was selecting wrong canonical URL (kvc.co.th - unrelated Thai website)
