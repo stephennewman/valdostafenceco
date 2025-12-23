@@ -149,7 +149,7 @@ export default function FreeEstimatePage() {
 
   const canSubmit = () => {
     const emailRequired = formData.scheduledDate ? formData.email !== "" : true;
-    return formData.name !== "" && formData.phone !== "" && emailRequired;
+    return formData.name !== "" && formData.phone !== "" && formData.address !== "" && emailRequired;
   };
 
   const totalSteps = 6;
@@ -472,7 +472,7 @@ export default function FreeEstimatePage() {
                       : "bg-gray-200 text-gray-400 cursor-not-allowed"
                   }`}
                 >
-                  Confirm Appointment
+                  Next
                 </button>
               </div>
             </div>
@@ -484,9 +484,24 @@ export default function FreeEstimatePage() {
               <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">
                 Your contact info
               </h1>
-              <p className="text-gray-500 mb-8">
+              <p className="text-gray-500 mb-6">
                 We&apos;ll use this to confirm your appointment
               </p>
+
+              {/* Appointment Summary */}
+              {formData.scheduledDate && formData.scheduledTime && (
+                <div className="mb-6 p-4 bg-gray-50 rounded-xl">
+                  <div className="flex items-center gap-3">
+                    <Calendar className="w-5 h-5 text-gray-600" />
+                    <div>
+                      <p className="font-medium text-gray-900">
+                        {formatSlotDate(new Date(formData.scheduledDate))}
+                      </p>
+                      <p className="text-sm text-gray-500">{formData.scheduledTime}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
               
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -534,10 +549,11 @@ export default function FreeEstimatePage() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Property Address
+                      Property Address *
                     </label>
                     <input
                       type="text"
+                      required
                       value={formData.address}
                       onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))}
                       placeholder="123 Main St"
@@ -575,7 +591,7 @@ export default function FreeEstimatePage() {
                         : "bg-gray-200 text-gray-400 cursor-not-allowed"
                     }`}
                   >
-                    {isLoading ? "Submitting..." : "Submit Request"}
+                    {isLoading ? "Scheduling..." : "Schedule My Estimate"}
                   </button>
                 </div>
               </form>
