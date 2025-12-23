@@ -24,8 +24,8 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    value: "info@valdostafenceco.com",
-    href: "mailto:info@valdostafenceco.com",
+    value: "stephen@valdostafenceco.com",
+    href: "mailto:stephen@valdostafenceco.com",
     description: "We respond within 24 hours",
   },
   {

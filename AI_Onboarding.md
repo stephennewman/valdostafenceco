@@ -72,6 +72,21 @@ LEADS_EMAIL=<your_business_email>
 ## Activity Log
 
 ### Tuesday, December 23, 2025 - Time TBD
+**Deploy #14 - Disable Email Notifications (Slack Only)**
+- **Change**: Turned OFF email notifications for phone CTA clicks and estimate requests
+- **Kept Active**: 
+  - ✅ Slack notifications for phone CTAs
+  - ✅ Slack notifications for estimate requests  
+  - ✅ Customer confirmation emails (still sent to customers who submit estimates)
+- **Disabled**:
+  - ❌ Internal email alerts for phone CTA clicks
+  - ❌ Internal email alerts for new estimate requests
+- **Files Updated**:
+  - `app/api/track-call/route.ts` - Removed email notification block
+  - `app/api/estimate/route.ts` - Removed internal business email
+- Commit: b5df55c
+
+### Tuesday, December 23, 2025 - Time TBD
 **Deploy #13 - Fix: TypeScript Build Error in Track-Call Route**
 - **Issue**: Build failed due to TypeScript type inference error in Slack blocks array
 - **Root Cause**: `slackBlocks` array type was inferred from initial elements (header/section blocks), rejected context block with different structure

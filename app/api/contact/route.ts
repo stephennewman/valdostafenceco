@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       from: "Valdosta Fence Co. <onboarding@resend.dev>",
-      to: [process.env.LEADS_EMAIL || "info@valdostafenceco.com"],
+      to: [process.env.LEADS_EMAIL || "stephen@valdostafenceco.com"],
       replyTo: email || undefined,
       subject: `New Contact Form: ${name}`,
       html: `

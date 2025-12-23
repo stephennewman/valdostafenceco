@@ -61,11 +61,11 @@ export default function Footer() {
                 iconClassName="w-4 h-4 text-[var(--red-light)]"
               />
               <a
-                href="mailto:info@valdostafenceco.com"
+                href="mailto:stephen@valdostafenceco.com"
                 className="flex items-center gap-3 text-white/70 hover:text-white transition-colors text-sm"
               >
                 <Mail className="w-4 h-4 text-[var(--red-light)]" />
-                info@valdostafenceco.com
+                stephen@valdostafenceco.com
               </a>
               <div className="flex items-center gap-3 text-white/70 text-sm">
                 <MapPin className="w-4 h-4 text-[var(--red-light)]" />

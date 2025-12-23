@@ -125,11 +125,11 @@ export default function MobileNav({
               iconClassName="w-5 h-5 text-[var(--red)]"
             />
             <a
-              href="mailto:info@valdostafenceco.com"
+              href="mailto:stephen@valdostafenceco.com"
               className="flex items-center gap-3 text-[var(--charcoal)] hover:text-[var(--red)] transition-colors"
             >
               <Mail className="w-5 h-5 text-[var(--red)]" />
-              <span>info@valdostafenceco.com</span>
+              <span>stephen@valdostafenceco.com</span>
             </a>
 
             <CTAButton href="/free-estimate" variant="primary" fullWidth>
