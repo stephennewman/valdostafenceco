@@ -134,63 +134,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 </div>
               </div>
 
-              {/* Project Gallery */}
-              <div className="mb-12">
-                <h2 className="text-2xl font-[var(--font-serif)] text-[var(--charcoal-dark)] mb-6">
-                  Project Gallery
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {serviceData.galleryImages && serviceData.galleryImages.length > 0 ? (
-                    <>
-                      {serviceData.galleryImages.map((img, i) => (
-                        <div
-                          key={i}
-                          className="aspect-square relative rounded-lg overflow-hidden border border-[var(--border)] group"
-                        >
-                          <Image
-                            src={img}
-                            alt={`${serviceData.shortName} project ${i + 1}`}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                      ))}
-                      {/* Fill remaining slots with placeholders if less than 6 images */}
-                      {Array.from({ length: Math.max(0, 6 - serviceData.galleryImages.length) }).map((_, i) => (
-                        <div
-                          key={`placeholder-${i}`}
-                          className="aspect-square bg-[var(--background-alt)] rounded-lg flex items-center justify-center border border-[var(--border)]"
-                        >
-                          <span className="text-[var(--foreground-muted)] text-sm">
-                            More Coming
-                          </span>
-                        </div>
-                      ))}
-                    </>
-                  ) : (
-                    [1, 2, 3, 4, 5, 6].map((i) => (
-                      <div
-                        key={i}
-                        className="aspect-square bg-[var(--background-alt)] rounded-lg flex items-center justify-center border border-[var(--border)]"
-                      >
-                        <span className="text-[var(--foreground-muted)] text-sm">
-                          Project Photo {i}
-                        </span>
-                      </div>
-                    ))
-                  )}
-                </div>
-                <p className="text-sm text-[var(--foreground-muted)] mt-4">
-                  <Link
-                    href="/gallery"
-                    className="text-[var(--red)] hover:underline"
-                  >
-                    View our full gallery
-                  </Link>{" "}
-                  for more {serviceData.shortName.toLowerCase()} projects.
-                </p>
-              </div>
-
               {/* FAQ */}
               <div>
                 <h2 className="text-2xl font-[var(--font-serif)] text-[var(--charcoal-dark)] mb-6">
