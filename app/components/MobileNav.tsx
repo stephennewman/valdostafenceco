@@ -133,7 +133,7 @@ export default function MobileNav({
             </a>
 
             <CTAButton href="/free-estimate" variant="primary" fullWidth>
-              Get Free Estimate
+              Schedule Estimate
             </CTAButton>
           </div>
         </div>

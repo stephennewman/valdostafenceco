@@ -61,7 +61,7 @@ export default function GalleryPage() {
               Want to see more of our work? Contact us to schedule an on-site visit or discuss your project.
             </p>
             <CTAButton href="/free-estimate" variant="outline">
-              Get Your Free Estimate
+              Schedule Estimate
             </CTAButton>
           </div>
         </div>
@@ -77,7 +77,7 @@ export default function GalleryPage() {
             Let us build something beautiful for your property. Get a free estimate today.
           </p>
           <CTAButton href="/free-estimate" variant="primary" size="lg">
-            Get Free Estimate
+            Schedule Estimate
           </CTAButton>
         </div>
       </section>

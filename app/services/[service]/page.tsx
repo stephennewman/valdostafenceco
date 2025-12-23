@@ -58,7 +58,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         subtitle={serviceData.shortName}
         title={`${serviceData.name} in Valdosta, GA`}
         description={serviceData.description}
-        primaryCTA={{ text: "Get Free Estimate", href: "/free-estimate" }}
+        primaryCTA={{ text: "Schedule Estimate", href: "/free-estimate" }}
         secondaryCTA={{ text: "Call Now", href: "tel:+12295636488" }}
         size="md"
       />
@@ -212,7 +212,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                   {serviceData.shortName.toLowerCase()} project.
                 </p>
                 <CTAButton href="/free-estimate" variant="primary" fullWidth>
-                  Get Free Estimate
+                  Schedule Estimate
                 </CTAButton>
                 <div className="mt-4 text-center">
                   <span className="text-white/60 text-sm">or call us</span>
@@ -267,7 +267,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <CTAButton href="/free-estimate" variant="primary" size="lg">
-              Get Free Estimate
+              Schedule Estimate
             </CTAButton>
             <CTAButton href="/contact" variant="outline" size="lg">
               Contact Us

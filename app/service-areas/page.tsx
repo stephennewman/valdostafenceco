@@ -28,7 +28,7 @@ export default function ServiceAreasPage() {
         subtitle="Service Areas"
         title="Proudly Serving South Georgia"
         description="From Valdosta to all communities within a 25-mile radius – we bring quality fencing to your neighborhood."
-        primaryCTA={{ text: "Get Free Estimate", href: "/free-estimate" }}
+        primaryCTA={{ text: "Schedule Estimate", href: "/free-estimate" }}
         size="md"
       />
 
@@ -189,7 +189,7 @@ export default function ServiceAreasPage() {
             for.
           </p>
           <CTAButton href="/free-estimate" variant="primary" size="lg">
-            Get Your Free Estimate
+            Schedule Your Estimate
           </CTAButton>
         </div>
       </section>

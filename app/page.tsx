@@ -103,7 +103,7 @@ export default function Home() {
         subtitle="Local & Family-Owned"
         title="Valdosta's Trusted Fence Experts"
         description="Quality fencing installation and repair for homes and businesses throughout South Georgia. Family-owned, locally operated, and committed to craftsmanship that lasts."
-        primaryCTA={{ text: "Get Free Estimate", href: "/free-estimate" }}
+        primaryCTA={{ text: "Schedule Estimate", href: "/free-estimate" }}
         secondaryCTA={{ text: "View Our Work", href: "/gallery" }}
         size="lg"
       />
@@ -331,7 +331,7 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <CTAButton href="/free-estimate" variant="primary" size="lg">
-              Get Free Estimate
+              Schedule Estimate
             </CTAButton>
             <PhoneLink
               location="homepage-cta"

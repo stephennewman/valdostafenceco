@@ -104,7 +104,7 @@ export default function BlogPage() {
                   Get a free estimate from Valdosta&apos;s trusted fence experts.
                 </p>
                 <CTAButton href="/free-estimate" variant="primary" fullWidth>
-                  Get Free Estimate
+                  Schedule Estimate
                 </CTAButton>
               </div>
 

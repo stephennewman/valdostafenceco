@@ -213,7 +213,7 @@ export default function AboutPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <CTAButton href="/free-estimate" variant="primary" size="lg">
-              Get Free Estimate
+              Schedule Estimate
             </CTAButton>
             <CTAButton href="/reviews" variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 hover:text-white">
               Read Customer Reviews

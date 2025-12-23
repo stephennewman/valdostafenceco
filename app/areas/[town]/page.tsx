@@ -62,7 +62,7 @@ export default async function AreaPage({ params }: AreaPageProps) {
         subtitle={area.county}
         title={`Fence Services in ${area.name}, GA`}
         description={`Quality fence installation and repair for ${area.name} homes and businesses. Your local, family-owned fence experts.`}
-        primaryCTA={{ text: "Get Free Estimate", href: "/free-estimate" }}
+        primaryCTA={{ text: "Schedule Estimate", href: "/free-estimate" }}
         secondaryCTA={{ text: "Call Now", href: "tel:+12295636488" }}
         size="md"
       />
@@ -196,7 +196,7 @@ export default async function AreaPage({ params }: AreaPageProps) {
                   to you!
                 </p>
                 <CTAButton href="/free-estimate" variant="primary" fullWidth>
-                  Get Free Estimate
+                  Schedule Estimate
                 </CTAButton>
                 <div className="mt-4 text-center">
                   <span className="text-white/60 text-sm">or call us</span>
@@ -252,7 +252,7 @@ export default async function AreaPage({ params }: AreaPageProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <CTAButton href="/free-estimate" variant="primary" size="lg">
-              Get Free Estimate
+              Schedule Estimate
             </CTAButton>
             <CTAButton href="/contact" variant="outline" size="lg">
               Contact Us

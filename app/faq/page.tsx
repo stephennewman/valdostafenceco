@@ -173,7 +173,7 @@ export default function FAQPage() {
               Contact Us
             </CTAButton>
             <CTAButton href="/free-estimate" variant="outline">
-              Get Free Estimate
+              Schedule Estimate
             </CTAButton>
           </div>
         </div>

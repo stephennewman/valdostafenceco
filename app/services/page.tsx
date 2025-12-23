@@ -27,7 +27,7 @@ export default function ServicesPage() {
         subtitle="Our Services"
         title="Complete Fencing Solutions"
         description="From installation to repair, residential to commercial – we handle all your fencing needs with quality craftsmanship and honest service."
-        primaryCTA={{ text: "Get Free Estimate", href: "/free-estimate" }}
+        primaryCTA={{ text: "Schedule Estimate", href: "/free-estimate" }}
         size="md"
       />
 

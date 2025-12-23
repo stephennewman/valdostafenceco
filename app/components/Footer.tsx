@@ -26,7 +26,7 @@ const company = [
   { name: "Reviews", href: "/reviews" },
   { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" },
-  { name: "Free Estimate", href: "/free-estimate" },
+  { name: "Schedule Estimate", href: "/free-estimate" },
 ];
 
 export default function Footer() {

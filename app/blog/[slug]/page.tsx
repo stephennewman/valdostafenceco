@@ -205,7 +205,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <CTAButton href="/free-estimate" variant="primary">
-                    Get Free Estimate
+                    Schedule Estimate
                   </CTAButton>
                   <PhoneLink
                     location="blog-post-cta"

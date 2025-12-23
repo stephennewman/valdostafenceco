@@ -124,7 +124,7 @@ export default function ReviewsPage() {
             free estimate today.
           </p>
           <CTAButton href="/free-estimate" variant="primary" size="lg">
-            Get Free Estimate
+            Schedule Estimate
           </CTAButton>
         </div>
       </section>

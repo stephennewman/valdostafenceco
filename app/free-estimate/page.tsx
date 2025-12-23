@@ -171,7 +171,7 @@ export default function FreeEstimatePage() {
           <p className="text-gray-600 text-center max-w-md mb-8">
             {hasScheduled
               ? `We'll see you on ${scheduledDateObj ? formatSlotDate(scheduledDateObj) : ""} between ${formData.scheduledTime}.`
-              : "We'll contact you within 24 hours to schedule your free estimate."}
+              : "We'll contact you within 24 hours to schedule your estimate."}
           </p>
           
           <div className="bg-gray-50 rounded-xl p-6 max-w-md w-full mb-8">

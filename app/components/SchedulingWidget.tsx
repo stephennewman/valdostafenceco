@@ -83,7 +83,7 @@ export default function SchedulingWidget({
       {/* Date Selection */}
       <div>
         <label className="block text-sm font-medium text-[var(--foreground)] mb-3">
-          Select a Date for Your Free Estimate
+          Select a Date for Your Estimate
         </label>
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
           {availableDates.slice(0, 8).map((date, index) => {
