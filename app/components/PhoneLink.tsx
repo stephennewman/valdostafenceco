@@ -27,11 +27,29 @@ export default function PhoneLink({
   iconClassName = "w-4 h-4",
 }: PhoneLinkProps) {
   const handleClick = () => {
+    // Google Analytics tracking
     if (typeof window !== "undefined" && window.gtag) {
       window.gtag("event", "phone_click", {
         event_category: "engagement",
         event_label: location,
         phone_number: phoneNumber,
+      });
+    }
+
+    // Send notification (fire-and-forget, won't delay call)
+    if (typeof window !== "undefined") {
+      fetch("/api/track-call", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          location,
+          phoneNumber,
+          timestamp: new Date().toISOString(),
+          referrer: window.location.href,
+          userAgent: navigator.userAgent,
+        }),
+      }).catch(() => {
+        // Silently fail - don't affect user experience
       });
     }
   };
