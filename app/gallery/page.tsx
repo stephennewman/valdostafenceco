@@ -46,10 +46,6 @@ export default function GalleryPage() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-[var(--red)]/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="text-white font-semibold">View Project</span>
-                  </div>
                 </div>
               </div>
             ))}
@@ -73,8 +69,8 @@ export default function GalleryPage() {
           <h2 className="text-3xl font-[var(--font-serif)] text-white mb-4">
             Ready for Your Own Project?
           </h2>
-          <p className="text-white/90 mb-8">
-            Let us build something beautiful for your property. Get a free estimate today.
+          <p className="text-white mb-8">
+            Let us build something beautiful for your property.
           </p>
           <CTAButton href="/free-estimate" variant="primary" size="lg">
             Schedule Estimate
