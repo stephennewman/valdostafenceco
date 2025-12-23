@@ -104,7 +104,7 @@ export default function Home() {
         title="Valdosta's Trusted Fence Experts"
         description="Quality fencing installation and repair for homes and businesses throughout South Georgia. Family-owned, locally operated, and committed to craftsmanship that lasts."
         primaryCTA={{ text: "Schedule Estimate", href: "/free-estimate" }}
-        secondaryCTA={{ text: "View Our Work", href: "/gallery" }}
+        backgroundImage="/valdostafenceco_hero.jpg"
         size="lg"
       />
 
@@ -148,47 +148,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-20 lg:py-28 bg-[var(--background-alt)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-3 mb-4">
-              <span className="w-8 h-px bg-[var(--red)]" />
-              <span className="text-[var(--red)] font-semibold text-sm uppercase tracking-wider">
-                Our Services
-              </span>
-              <span className="w-8 h-px bg-[var(--red)]" />
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-[var(--font-serif)] text-[var(--charcoal-dark)] mb-4">
-              Fencing Solutions for Every Need
-            </h2>
-            <p className="text-[var(--gray)] leading-relaxed">
-              From wood and vinyl to chain link and aluminum, we install and repair all types of residential and commercial fencing.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredServices.map((service) => (
-              <ServiceCard
-                key={service.title}
-                title={service.title}
-                description={service.description}
-                href={service.href}
-                icon={service.icon}
-              />
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <CTAButton href="/services" variant="outline">
-              View All Services
-            </CTAButton>
-          </div>
-        </div>
-      </section>
-
       {/* Recent Work Section */}
-      <section className="py-20 lg:py-28 bg-white">
+      <section className="py-20 lg:py-28 bg-[var(--background-alt)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -226,6 +187,45 @@ export default function Home() {
           <div className="text-center mt-10">
             <CTAButton href="/gallery" variant="outline">
               View Full Gallery
+            </CTAButton>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <span className="w-8 h-px bg-[var(--red)]" />
+              <span className="text-[var(--red)] font-semibold text-sm uppercase tracking-wider">
+                Our Services
+              </span>
+              <span className="w-8 h-px bg-[var(--red)]" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-[var(--font-serif)] text-[var(--charcoal-dark)] mb-4">
+              Fencing Solutions for Every Need
+            </h2>
+            <p className="text-[var(--gray)] leading-relaxed">
+              From wood and vinyl to chain link and aluminum, we install and repair all types of residential and commercial fencing.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {featuredServices.map((service) => (
+              <ServiceCard
+                key={service.title}
+                title={service.title}
+                description={service.description}
+                href={service.href}
+                icon={service.icon}
+              />
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <CTAButton href="/services" variant="outline">
+              View All Services
             </CTAButton>
           </div>
         </div>
