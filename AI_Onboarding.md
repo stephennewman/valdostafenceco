@@ -72,6 +72,25 @@ LEADS_EMAIL=<your_business_email>
 ## Activity Log
 
 ### Tuesday, December 23, 2025 - Time TBD
+**Deploy #11 - Enhanced Phone CTA Tracking with Rich Metadata**
+- **Feature**: Comprehensive metadata capture for phone click analytics
+- **New Data Points**:
+  - UTM parameters (utm_source, utm_medium, utm_campaign, utm_term, utm_content)
+  - Google Ads click ID (gclid) & Facebook click ID (fbclid)
+  - Device type detection (mobile/tablet/desktop)
+  - Screen size & viewport dimensions
+  - Browser language
+  - Session duration (time on site before calling)
+  - Original referrer (how they found the site)
+- **Traffic Source Detection**: Automatically identifies Google Ads, Facebook Ads, organic search, social, or direct
+- **Slack Notifications**: Now show traffic source, device type, page, time on site, and campaign details
+- **Email Notifications**: Rich HTML with traffic info, device details, and full UTM attribution section
+- **Files Updated**:
+  - `app/components/PhoneLink.tsx` - Captures all metadata on click
+  - `app/api/track-call/route.ts` - Processes and displays rich metadata
+- Commit: 0414f16
+
+### Tuesday, December 23, 2025 - Time TBD
 **Deploy #10 - Slack Notifications for Free Estimate Submissions**
 - **Feature**: Slack alerts for new estimate form submissions
 - **Notification Includes**: Name, phone, email, city, fence type, timeline, length, lead score, scheduled appointment

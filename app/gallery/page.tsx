@@ -4,20 +4,20 @@ import Image from "next/image";
 import HeroSection from "../components/HeroSection";
 import CTAButton from "../components/CTAButton";
 
-// Gallery projects with images
+// Gallery projects with images and SEO-optimized alt text
 const projects = [
-  { id: 1, image: "/valdostafenceco_1.png" },
-  { id: 2, image: "/valdostafenceco_2.png" },
-  { id: 3, image: "/valdostafenceco_3.png" },
-  { id: 4, image: "/valdostafenceco_4.png" },
-  { id: 5, image: "/valdostafenceco_5.png" },
-  { id: 6, image: "/valdostafenceco_6.png" },
-  { id: 7, image: "/valdostafenceco_7.png" },
-  { id: 8, image: "/valdostafenceco_8.png" },
-  { id: 9, image: "/valdostafenceco_9.png" },
-  { id: 10, image: "/valdostafenceco_10.png" },
-  { id: 11, image: "/valdostafenceco_11.png" },
-  { id: 12, image: "/valdostafenceco.png" },
+  { id: 1, image: "/valdostafenceco_1.png", alt: "Wood privacy fence installation in Valdosta GA backyard" },
+  { id: 2, image: "/valdostafenceco_2.png", alt: "Residential wood fence with gate installed in South Georgia" },
+  { id: 3, image: "/valdostafenceco_3.png", alt: "Custom cedar fence construction Valdosta Georgia" },
+  { id: 4, image: "/valdostafenceco_4.png", alt: "Professional fence installation crew working in Lowndes County" },
+  { id: 5, image: "/valdostafenceco_5.png", alt: "Privacy fence for residential property in Hahira GA" },
+  { id: 6, image: "/valdostafenceco_6.png", alt: "Wood fence with decorative lattice top Valdosta" },
+  { id: 7, image: "/valdostafenceco_7.png", alt: "Backyard fence installation South Georgia home" },
+  { id: 8, image: "/valdostafenceco_8.png", alt: "Pressure treated wood fence Valdosta fence company" },
+  { id: 9, image: "/valdostafenceco_9.png", alt: "Fence repair and replacement project Lake Park GA" },
+  { id: 10, image: "/valdostafenceco_10.png", alt: "New fence installation residential Valdosta Georgia" },
+  { id: 11, image: "/valdostafenceco_11.png", alt: "Quality fence craftsmanship South Georgia contractor" },
+  { id: 12, image: "/valdostafenceco.png", alt: "Valdosta Fence Co completed fence project" },
 ];
 
 export default function GalleryPage() {
@@ -43,7 +43,7 @@ export default function GalleryPage() {
                 <div className="aspect-[4/3] bg-[var(--background-alt)] flex items-center justify-center relative overflow-hidden">
                   <Image
                     src={project.image}
-                    alt="Fence project"
+                    alt={project.alt}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
