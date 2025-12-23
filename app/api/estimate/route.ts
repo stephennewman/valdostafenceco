@@ -238,8 +238,49 @@ export async function POST(request: Request) {
     const appointmentTag = hasAppointment ? " [SCHEDULED]" : "";
 
     // =====================================================
-    // INTERNAL EMAIL DISABLED - Using Slack only for business notifications
+    // EMAIL 1: Internal notification to business
     // =====================================================
+    const { error: internalError } = await resend.emails.send({
+      from: "Valdosta Fence Co. <stephen@valdostafenceco.com>",
+      to: [process.env.LEADS_EMAIL || "info@valdostafenceco.com"],
+      replyTo: email || undefined,
+      subject: `${subjectEmoji} ${priorityBadge}${appointmentTag} - ${name} in ${city || "Valdosta"}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          ${leadScoreSection}
+          ${scheduledInfo}
+          <h2 style="color: #333; border-bottom: 2px solid #8B2D32; padding-bottom: 10px;">
+            New Estimate Request
+          </h2>
+          
+          <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="color: #8B2D32; margin-top: 0;">Contact Information</h3>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Phone:</strong> <a href="tel:${phone}">${phone}</a></p>
+            ${email ? `<p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>` : ""}
+            ${address ? `<p><strong>Address:</strong> ${address}</p>` : ""}
+            ${city ? `<p><strong>City:</strong> ${city}</p>` : ""}
+          </div>
+          
+          <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="color: #8B2D32; margin-top: 0;">Project Details</h3>
+            <p><strong>Property Type:</strong> ${propertyType || "Not specified"}</p>
+            <p><strong>Fence Type:</strong> ${fenceTypeDisplay}</p>
+            <p><strong>Fence Length:</strong> ${fenceLengthDisplay}</p>
+            <p><strong>Timeline:</strong> ${timeline || "Not specified"}</p>
+            ${notes ? `<p><strong>Notes:</strong> ${notes}</p>` : ""}
+          </div>
+          
+          <p style="color: #666; font-size: 12px; margin-top: 30px;">
+            This lead was submitted via valdostafenceco.com
+          </p>
+        </div>
+      `,
+    });
+
+    if (internalError) {
+      console.error("Internal email error:", internalError);
+    }
 
     // =====================================================
     // EMAIL 2: Customer confirmation (if email provided)
