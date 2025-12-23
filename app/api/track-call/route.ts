@@ -1,4 +1,3 @@
-import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -145,64 +144,7 @@ export async function POST(request: Request) {
       }
     }
 
-    // =====================================================
-    // EMAIL NOTIFICATION (if Resend configured)
-    // =====================================================
-    if (process.env.RESEND_API_KEY && process.env.PHONE_CLICK_NOTIFICATIONS !== "false") {
-      try {
-        const resend = new Resend(process.env.RESEND_API_KEY);
-
-        await resend.emails.send({
-          from: "Valdosta Fence Co. <stephen@valdostafenceco.com>",
-          to: [process.env.LEADS_EMAIL || "info@valdostafenceco.com"],
-          subject: `📞 Phone CTA Clicked - ${location} (${deviceType})`,
-          html: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px;">
-              <h2 style="color: #333; margin-bottom: 20px;">📞 Someone clicked to call!</h2>
-              
-              <div style="background-color: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
-                <p style="margin: 0 0 8px 0;"><strong>CTA Location:</strong> ${location || "Unknown"}</p>
-                <p style="margin: 0 0 8px 0;"><strong>Time:</strong> ${clickTime}</p>
-                <p style="margin: 0 0 8px 0;"><strong>Phone:</strong> ${phoneNumber || "(229) 563-6488"}</p>
-                <p style="margin: 0;"><strong>Page:</strong> ${currentPage || "Unknown"}</p>
-              </div>
-
-              <div style="background-color: #f8fafc; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
-                <h3 style="margin: 0 0 12px 0; font-size: 14px; color: #666;">Traffic & Device Info</h3>
-                <p style="margin: 0 0 6px 0;"><strong>Traffic Source:</strong> ${trafficSource}</p>
-                <p style="margin: 0 0 6px 0;"><strong>Device:</strong> ${deviceEmoji} ${deviceType || "Unknown"} (${screenSize || "—"})</p>
-                <p style="margin: 0 0 6px 0;"><strong>Viewport:</strong> ${viewport || "Unknown"}</p>
-                <p style="margin: 0 0 6px 0;"><strong>Language:</strong> ${language || "Unknown"}</p>
-                <p style="margin: 0;"><strong>Time on Site:</strong> ${formatDuration(sessionDurationSeconds)}</p>
-              </div>
-
-              ${hasUtm ? `
-              <div style="background-color: #fef3c7; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
-                <h3 style="margin: 0 0 12px 0; font-size: 14px; color: #92400e;">📊 Campaign Attribution</h3>
-                <p style="margin: 0 0 6px 0;"><strong>Source:</strong> ${utm_source || "—"}</p>
-                <p style="margin: 0 0 6px 0;"><strong>Medium:</strong> ${utm_medium || "—"}</p>
-                <p style="margin: 0 0 6px 0;"><strong>Campaign:</strong> ${utm_campaign || "—"}</p>
-                <p style="margin: 0 0 6px 0;"><strong>Term:</strong> ${utm_term || "—"}</p>
-                <p style="margin: 0;"><strong>Content:</strong> ${utm_content || "—"}</p>
-                ${gclid ? `<p style="margin: 6px 0 0 0;"><strong>Google Click ID:</strong> ${gclid}</p>` : ""}
-                ${fbclid ? `<p style="margin: 6px 0 0 0;"><strong>Facebook Click ID:</strong> ${fbclid}</p>` : ""}
-              </div>
-              ` : ""}
-
-              ${originalReferrer && originalReferrer !== "direct" ? `
-              <p style="color: #666; font-size: 12px;"><strong>Original Referrer:</strong> ${originalReferrer}</p>
-              ` : ""}
-              
-              <p style="color: #999; font-size: 11px; margin-top: 20px;">
-                This notification was triggered by a phone CTA click on valdostafenceco.com
-              </p>
-            </div>
-          `,
-        });
-      } catch (emailError) {
-        console.error("Email notification failed:", emailError);
-      }
-    }
+    // EMAIL NOTIFICATION DISABLED - Using Slack only
 
     return NextResponse.json({ success: true });
   } catch (error) {

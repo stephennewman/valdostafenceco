@@ -238,51 +238,8 @@ export async function POST(request: Request) {
     const appointmentTag = hasAppointment ? " [SCHEDULED]" : "";
 
     // =====================================================
-    // EMAIL 1: Internal notification to business
+    // INTERNAL EMAIL DISABLED - Using Slack only for business notifications
     // =====================================================
-    const { data: internalData, error: internalError } = await resend.emails.send({
-      from: "Valdosta Fence Co. <stephen@valdostafenceco.com>",
-      to: [process.env.LEADS_EMAIL || "info@valdostafenceco.com"],
-      replyTo: email || undefined,
-      subject: `${subjectEmoji} ${priorityBadge}${appointmentTag} - ${name} in ${city || "Valdosta"}`,
-      html: `
-        <h2>New Free Estimate Request</h2>
-        
-        ${leadScoreSection}
-        ${scheduledInfo}
-        
-        <h3>Contact Information</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Phone:</strong> <a href="tel:${phone}">${phone}</a></p>
-        <p><strong>Email:</strong> ${email || "Not provided"}</p>
-        <p><strong>Address:</strong> ${address || "Not provided"}</p>
-        <p><strong>City:</strong> ${city || "Not provided"}</p>
-        
-        <hr />
-        
-        <h3>Project Details</h3>
-        <p><strong>Property Type:</strong> ${propertyType || "Not specified"}</p>
-        <p><strong>Fence Type(s):</strong> ${fenceTypesList}</p>
-        <p><strong>Fence Length:</strong> ${fenceLengthDisplay}</p>
-        <p><strong>Timeline:</strong> ${timeline || "Not specified"}</p>
-        
-        <hr />
-        
-        <h3>Additional Notes</h3>
-        <p>${notes || "None provided"}</p>
-        
-        <hr />
-        <p style="color: #666; font-size: 12px;">
-          This lead came from the Free Estimate form on valdostafenceco.com<br/>
-          ${leadId ? `Lead ID: ${leadId}` : ""}
-        </p>
-      `,
-    });
-
-    if (internalError) {
-      console.error("Internal email error:", internalError);
-      // Continue - don't fail the whole request if internal email fails
-    }
 
     // =====================================================
     // EMAIL 2: Customer confirmation (if email provided)
@@ -322,7 +279,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ 
       success: true, 
-      id: internalData?.id,
       leadId,
       customerEmailSent,
     });

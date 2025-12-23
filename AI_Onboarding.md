@@ -72,6 +72,15 @@ LEADS_EMAIL=<your_business_email>
 ## Activity Log
 
 ### Tuesday, December 23, 2025 - Time TBD
+**Deploy #13 - Fix: TypeScript Build Error in Track-Call Route**
+- **Issue**: Build failed due to TypeScript type inference error in Slack blocks array
+- **Root Cause**: `slackBlocks` array type was inferred from initial elements (header/section blocks), rejected context block with different structure
+- **Fix**: Added explicit `any[]` type annotation to slackBlocks array
+- **Files Updated**:
+  - `app/api/track-call/route.ts` - Fixed type annotation
+- Commit: 62aef80
+
+### Tuesday, December 23, 2025 - Time TBD
 **Deploy #12 - SEO: Descriptive Alt Text for Gallery Images**
 - **Feature**: Added unique, keyword-rich alt text to all 12 gallery images
 - **SEO Impact**: Enables ranking in Google Images for searches like "wood fence Valdosta", "privacy fence Georgia"
