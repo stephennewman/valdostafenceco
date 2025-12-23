@@ -7,10 +7,12 @@ interface HeroSectionProps {
   primaryCTA?: {
     text: string;
     href: string;
+    trackingLabel?: string;
   };
   secondaryCTA?: {
     text: string;
     href: string;
+    trackingLabel?: string;
   };
   backgroundImage?: string;
   overlay?: boolean;
@@ -94,12 +96,12 @@ export default function HeroSection({
               }`}
             >
               {primaryCTA && (
-                <CTAButton href={primaryCTA.href} variant="primary" size="lg">
+                <CTAButton href={primaryCTA.href} variant="primary" size="lg" trackingLabel={primaryCTA.trackingLabel}>
                   {primaryCTA.text}
                 </CTAButton>
               )}
               {secondaryCTA && (
-                <CTAButton href={secondaryCTA.href} variant="outline" size="lg">
+                <CTAButton href={secondaryCTA.href} variant="outline" size="lg" trackingLabel={secondaryCTA.trackingLabel}>
                   {secondaryCTA.text}
                 </CTAButton>
               )}

@@ -3,6 +3,12 @@
 import Link from "next/link";
 import { clsx } from "clsx";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 interface CTAButtonProps {
   href?: string;
   onClick?: () => void;
@@ -13,6 +19,7 @@ interface CTAButtonProps {
   type?: "button" | "submit";
   fullWidth?: boolean;
   disabled?: boolean;
+  trackingLabel?: string; // e.g., "hero", "header", "footer", "service-page"
 }
 
 export default function CTAButton({
@@ -25,6 +32,7 @@ export default function CTAButton({
   type = "button",
   fullWidth = false,
   disabled = false,
+  trackingLabel,
 }: CTAButtonProps) {
   const baseStyles =
     "inline-flex items-center justify-center font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer";
@@ -53,9 +61,20 @@ export default function CTAButton({
     className
   );
 
+  const trackClick = () => {
+    // Track estimate CTA clicks
+    if (href === "/free-estimate" && typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "estimate_cta_click", {
+        event_category: "engagement",
+        event_label: trackingLabel || "unknown",
+        link_url: href,
+      });
+    }
+  };
+
   if (href) {
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} className={classes} onClick={trackClick}>
         {children}
       </Link>
     );

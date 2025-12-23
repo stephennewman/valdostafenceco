@@ -26,6 +26,13 @@ function getAnalyticsClient() {
 
 const PROPERTY_ID = process.env.GA_PROPERTY_ID || "517117328";
 
+export interface TrendData {
+  current: number;
+  previous: number;
+  change: number; // percentage change
+  direction: "up" | "down" | "flat";
+}
+
 export interface AnalyticsData {
   period: string;
   totalUsers: number;
@@ -33,20 +40,80 @@ export interface AnalyticsData {
   sessions: number;
   pageViews: number;
   avgSessionDuration: string;
+  avgSessionDurationSeconds: number;
   bounceRate: string;
+  bounceRateValue: number;
   topPages: { page: string; views: number }[];
   topSources: { source: string; users: number }[];
   topCities: { city: string; users: number }[];
+  // CTA Events
+  estimateClicks: number;
+  phoneClicks: number;
+  // Trends (compared to previous period)
+  trends?: {
+    totalUsers: TrendData;
+    pageViews: TrendData;
+    sessions: TrendData;
+    estimateClicks: TrendData;
+    phoneClicks: TrendData;
+  };
 }
 
-export async function getAnalyticsData(
+function calculateTrend(current: number, previous: number): TrendData {
+  if (previous === 0) {
+    return {
+      current,
+      previous,
+      change: current > 0 ? 100 : 0,
+      direction: current > 0 ? "up" : "flat",
+    };
+  }
+  const change = ((current - previous) / previous) * 100;
+  return {
+    current,
+    previous,
+    change: Math.abs(change),
+    direction: change > 1 ? "up" : change < -1 ? "down" : "flat",
+  };
+}
+
+async function getEventCount(
+  client: BetaAnalyticsDataClient,
   startDate: string,
   endDate: string,
-  periodLabel: string
-): Promise<AnalyticsData> {
-  const client = getAnalyticsClient();
+  eventName: string
+): Promise<number> {
+  try {
+    const [response] = await client.runReport({
+      property: `properties/${PROPERTY_ID}`,
+      dateRanges: [{ startDate, endDate }],
+      dimensions: [{ name: "eventName" }],
+      metrics: [{ name: "eventCount" }],
+      dimensionFilter: {
+        filter: {
+          fieldName: "eventName",
+          stringFilter: { value: eventName },
+        },
+      },
+    });
+    return parseInt(response.rows?.[0]?.metricValues?.[0]?.value || "0");
+  } catch {
+    return 0;
+  }
+}
 
-  // Main metrics request
+async function getBasicMetrics(
+  client: BetaAnalyticsDataClient,
+  startDate: string,
+  endDate: string
+): Promise<{
+  totalUsers: number;
+  newUsers: number;
+  sessions: number;
+  pageViews: number;
+  avgDurationSeconds: number;
+  bounceRateValue: number;
+}> {
   const [metricsResponse] = await client.runReport({
     property: `properties/${PROPERTY_ID}`,
     dateRanges: [{ startDate, endDate }],
@@ -59,6 +126,63 @@ export async function getAnalyticsData(
       { name: "bounceRate" },
     ],
   });
+
+  const metrics = metricsResponse.rows?.[0]?.metricValues || [];
+  return {
+    totalUsers: parseInt(metrics[0]?.value || "0"),
+    newUsers: parseInt(metrics[1]?.value || "0"),
+    sessions: parseInt(metrics[2]?.value || "0"),
+    pageViews: parseInt(metrics[3]?.value || "0"),
+    avgDurationSeconds: parseFloat(metrics[4]?.value || "0"),
+    bounceRateValue: parseFloat(metrics[5]?.value || "0"),
+  };
+}
+
+export async function getAnalyticsData(
+  startDate: string,
+  endDate: string,
+  periodLabel: string,
+  includeTrends: boolean = true
+): Promise<AnalyticsData> {
+  const client = getAnalyticsClient();
+
+  // Calculate previous period dates for comparison
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const daysDiff = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+  
+  const prevEnd = new Date(start);
+  prevEnd.setDate(prevEnd.getDate() - 1);
+  const prevStart = new Date(prevEnd);
+  prevStart.setDate(prevStart.getDate() - daysDiff + 1);
+  
+  const prevStartDate = prevStart.toISOString().split("T")[0];
+  const prevEndDate = prevEnd.toISOString().split("T")[0];
+
+  // Fetch current period data
+  const [currentMetrics, estimateClicks, phoneClicks] = await Promise.all([
+    getBasicMetrics(client, startDate, endDate),
+    getEventCount(client, startDate, endDate, "estimate_cta_click"),
+    getEventCount(client, startDate, endDate, "phone_click"),
+  ]);
+
+  // Fetch previous period data for trends
+  let trends: AnalyticsData["trends"];
+  if (includeTrends) {
+    const [prevMetrics, prevEstimateClicks, prevPhoneClicks] = await Promise.all([
+      getBasicMetrics(client, prevStartDate, prevEndDate),
+      getEventCount(client, prevStartDate, prevEndDate, "estimate_cta_click"),
+      getEventCount(client, prevStartDate, prevEndDate, "phone_click"),
+    ]);
+
+    trends = {
+      totalUsers: calculateTrend(currentMetrics.totalUsers, prevMetrics.totalUsers),
+      pageViews: calculateTrend(currentMetrics.pageViews, prevMetrics.pageViews),
+      sessions: calculateTrend(currentMetrics.sessions, prevMetrics.sessions),
+      estimateClicks: calculateTrend(estimateClicks, prevEstimateClicks),
+      phoneClicks: calculateTrend(phoneClicks, prevPhoneClicks),
+    };
+  }
 
   // Top pages request
   const [pagesResponse] = await client.runReport({
@@ -90,22 +214,13 @@ export async function getAnalyticsData(
     limit: 5,
   });
 
-  // Parse main metrics
-  const metrics = metricsResponse.rows?.[0]?.metricValues || [];
-  const totalUsers = parseInt(metrics[0]?.value || "0");
-  const newUsers = parseInt(metrics[1]?.value || "0");
-  const sessions = parseInt(metrics[2]?.value || "0");
-  const pageViews = parseInt(metrics[3]?.value || "0");
-  const avgDurationSeconds = parseFloat(metrics[4]?.value || "0");
-  const bounceRateValue = parseFloat(metrics[5]?.value || "0");
-
   // Format duration
-  const minutes = Math.floor(avgDurationSeconds / 60);
-  const seconds = Math.round(avgDurationSeconds % 60);
+  const minutes = Math.floor(currentMetrics.avgDurationSeconds / 60);
+  const seconds = Math.round(currentMetrics.avgDurationSeconds % 60);
   const avgSessionDuration = `${minutes}m ${seconds}s`;
 
   // Format bounce rate
-  const bounceRate = `${(bounceRateValue * 100).toFixed(1)}%`;
+  const bounceRate = `${(currentMetrics.bounceRateValue * 100).toFixed(1)}%`;
 
   // Parse top pages
   const topPages =
@@ -132,21 +247,42 @@ export async function getAnalyticsData(
 
   return {
     period: periodLabel,
-    totalUsers,
-    newUsers,
-    sessions,
-    pageViews,
+    totalUsers: currentMetrics.totalUsers,
+    newUsers: currentMetrics.newUsers,
+    sessions: currentMetrics.sessions,
+    pageViews: currentMetrics.pageViews,
     avgSessionDuration,
+    avgSessionDurationSeconds: currentMetrics.avgDurationSeconds,
     bounceRate,
+    bounceRateValue: currentMetrics.bounceRateValue,
     topPages,
     topSources,
     topCities,
+    estimateClicks,
+    phoneClicks,
+    trends,
   };
+}
+
+function formatTrend(trend: TrendData | undefined, isInverse: boolean = false): string {
+  if (!trend) return "";
+  
+  const arrow = trend.direction === "up" ? "↑" : trend.direction === "down" ? "↓" : "→";
+  const color = trend.direction === "flat" 
+    ? "" 
+    : (trend.direction === "up" !== isInverse) ? " 🟢" : " 🔴";
+  
+  if (trend.change === 0 || trend.direction === "flat") {
+    return " (→ no change)";
+  }
+  
+  return ` (${arrow}${trend.change.toFixed(0)}%${color})`;
 }
 
 export function formatSlackMessage(data: AnalyticsData, type: "daily" | "weekly" | "monthly"): object {
   const emoji = type === "daily" ? "📊" : type === "weekly" ? "📈" : "🎯";
   const title = type === "daily" ? "Daily" : type === "weekly" ? "Weekly" : "Monthly";
+  const comparisonText = type === "daily" ? "vs yesterday" : type === "weekly" ? "vs last week" : "vs last month";
 
   const topPagesText = data.topPages
     .map((p, i) => `${i + 1}. \`${p.page}\` - ${p.views} views`)
@@ -161,89 +297,114 @@ export function formatSlackMessage(data: AnalyticsData, type: "daily" | "weekly"
     .map((c) => `• ${c.city}: ${c.users}`)
     .join("\n");
 
-  return {
-    blocks: [
-      {
-        type: "header",
-        text: {
-          type: "plain_text",
-          text: `${emoji} Valdosta Fence Co. - ${title} Report`,
-          emoji: true,
-        },
+  // Build blocks array
+  const blocks: object[] = [
+    {
+      type: "header",
+      text: {
+        type: "plain_text",
+        text: `${emoji} Valdosta Fence Co. - ${title} Report`,
+        emoji: true,
       },
-      {
-        type: "section",
-        text: {
+    },
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `*Period:* ${data.period}${data.trends ? `\n_Trends ${comparisonText}_` : ""}`,
+      },
+    },
+    {
+      type: "divider",
+    },
+    {
+      type: "section",
+      fields: [
+        {
           type: "mrkdwn",
-          text: `*Period:* ${data.period}`,
+          text: `*👥 Total Visitors*\n${data.totalUsers.toLocaleString()}${formatTrend(data.trends?.totalUsers)}`,
         },
-      },
-      {
-        type: "divider",
-      },
-      {
-        type: "section",
-        fields: [
-          {
-            type: "mrkdwn",
-            text: `*👥 Total Visitors*\n${data.totalUsers.toLocaleString()}`,
-          },
-          {
-            type: "mrkdwn",
-            text: `*🆕 New Visitors*\n${data.newUsers.toLocaleString()}`,
-          },
-          {
-            type: "mrkdwn",
-            text: `*📄 Page Views*\n${data.pageViews.toLocaleString()}`,
-          },
-          {
-            type: "mrkdwn",
-            text: `*🔄 Sessions*\n${data.sessions.toLocaleString()}`,
-          },
-          {
-            type: "mrkdwn",
-            text: `*⏱️ Avg. Duration*\n${data.avgSessionDuration}`,
-          },
-          {
-            type: "mrkdwn",
-            text: `*↩️ Bounce Rate*\n${data.bounceRate}`,
-          },
-        ],
-      },
-      {
-        type: "divider",
-      },
-      {
-        type: "section",
-        text: {
+        {
           type: "mrkdwn",
-          text: `*🔥 Top Pages*\n${topPagesText || "No data"}`,
+          text: `*🆕 New Visitors*\n${data.newUsers.toLocaleString()}`,
         },
+        {
+          type: "mrkdwn",
+          text: `*📄 Page Views*\n${data.pageViews.toLocaleString()}${formatTrend(data.trends?.pageViews)}`,
+        },
+        {
+          type: "mrkdwn",
+          text: `*🔄 Sessions*\n${data.sessions.toLocaleString()}${formatTrend(data.trends?.sessions)}`,
+        },
+        {
+          type: "mrkdwn",
+          text: `*⏱️ Avg. Duration*\n${data.avgSessionDuration}`,
+        },
+        {
+          type: "mrkdwn",
+          text: `*↩️ Bounce Rate*\n${data.bounceRate}`,
+        },
+      ],
+    },
+    {
+      type: "divider",
+    },
+    // CTA Performance Section
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: "*📞 CTA Performance*",
       },
-      {
-        type: "section",
-        fields: [
-          {
-            type: "mrkdwn",
-            text: `*🌐 Traffic Sources*\n${topSourcesText || "No data"}`,
-          },
-          {
-            type: "mrkdwn",
-            text: `*📍 Top Cities*\n${topCitiesText || "No data"}`,
-          },
-        ],
+    },
+    {
+      type: "section",
+      fields: [
+        {
+          type: "mrkdwn",
+          text: `*📅 Estimate Clicks*\n${data.estimateClicks}${formatTrend(data.trends?.estimateClicks)}`,
+        },
+        {
+          type: "mrkdwn",
+          text: `*📱 Phone Clicks*\n${data.phoneClicks}${formatTrend(data.trends?.phoneClicks)}`,
+        },
+      ],
+    },
+    {
+      type: "divider",
+    },
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `*🔥 Top Pages*\n${topPagesText || "No data"}`,
       },
-      {
-        type: "context",
-        elements: [
-          {
-            type: "mrkdwn",
-            text: "Data from Google Analytics • valdostafenceco.com",
-          },
-        ],
-      },
-    ],
-  };
+    },
+    {
+      type: "section",
+      fields: [
+        {
+          type: "mrkdwn",
+          text: `*🌐 Traffic Sources*\n${topSourcesText || "No data"}`,
+        },
+        {
+          type: "mrkdwn",
+          text: `*📍 Top Cities*\n${topCitiesText || "No data"}`,
+        },
+      ],
+    },
+    {
+      type: "context",
+      elements: [
+        {
+          type: "mrkdwn",
+          text: "Data from Google Analytics • valdostafenceco.com",
+        },
+      ],
+    },
+  ];
+
+  return { blocks };
 }
 
 export async function sendToSlack(message: object): Promise<boolean> {

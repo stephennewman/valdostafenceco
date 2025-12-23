@@ -63,7 +63,7 @@ export default function Header() {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-4">
-              <CTAButton href="/free-estimate" variant="primary">
+              <CTAButton href="/free-estimate" variant="primary" trackingLabel="header">
                 Schedule Estimate
               </CTAButton>
             </div>
@@ -97,7 +97,7 @@ export default function Header() {
         >
           Call Now
         </PhoneLink>
-        <CTAButton href="/free-estimate" variant="primary" className="flex-1">
+        <CTAButton href="/free-estimate" variant="primary" className="flex-1" trackingLabel="mobile-sticky">
           Schedule Estimate
         </CTAButton>
       </div>
