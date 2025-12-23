@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { CheckCircle, ArrowRight, ArrowLeft } from "lucide-react";
 import HeroSection from "../components/HeroSection";
 import CTAButton from "../components/CTAButton";
@@ -61,6 +61,14 @@ export default function FreeEstimatePage() {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const formRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to form top when step changes
+  useEffect(() => {
+    if (formRef.current && step > 1) {
+      formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [step]);
 
   const updateForm = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -277,7 +285,7 @@ export default function FreeEstimatePage() {
       />
 
       <section className="py-16 lg:py-24 bg-[var(--background)]">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div ref={formRef} className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-8">
           {/* Progress Bar */}
           <div className="mb-8">
             <div className="flex justify-between mb-2">

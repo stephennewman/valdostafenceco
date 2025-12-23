@@ -99,18 +99,6 @@ export default function GalleryPage() {
                     <span className="text-white font-semibold">View Project</span>
                   </div>
                 </div>
-                {/* Project Info */}
-                <div className="p-4">
-                  <span className="text-xs text-[var(--red)] uppercase font-semibold">
-                    {categories.find((c) => c.id === project.category)?.label}
-                  </span>
-                  <h3 className="font-[var(--font-serif)] text-[var(--charcoal-dark)] mt-1">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-[var(--foreground-muted)] mt-1">
-                    {project.description}
-                  </p>
-                </div>
               </div>
             ))}
           </div>
