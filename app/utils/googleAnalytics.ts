@@ -2,9 +2,23 @@ import { BetaAnalyticsDataClient } from "@google-analytics/data";
 
 // Initialize the client with service account credentials
 function getAnalyticsClient() {
+  let privateKey = process.env.GA_PRIVATE_KEY || "";
+  
+  // Handle various newline formats from env vars
+  privateKey = privateKey.replace(/\\n/g, "\n");
+  
+  // If the key doesn't have proper line breaks, try to fix it
+  if (!privateKey.includes("\n") && privateKey.includes("-----BEGIN")) {
+    // Key might be base64 or have escaped characters
+    privateKey = privateKey
+      .replace(/-----BEGIN PRIVATE KEY-----/, "-----BEGIN PRIVATE KEY-----\n")
+      .replace(/-----END PRIVATE KEY-----/, "\n-----END PRIVATE KEY-----")
+      .replace(/(.{64})/g, "$1\n");
+  }
+
   const credentials = {
     client_email: process.env.GA_CLIENT_EMAIL,
-    private_key: process.env.GA_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    private_key: privateKey,
   };
 
   return new BetaAnalyticsDataClient({ credentials });
