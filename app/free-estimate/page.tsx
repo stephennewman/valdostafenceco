@@ -4,7 +4,6 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { CheckCircle, ArrowRight, ArrowLeft } from "lucide-react";
 import HeroSection from "../components/HeroSection";
 import CTAButton from "../components/CTAButton";
-import PhoneLink from "../components/PhoneLink";
 import SchedulingWidget from "../components/SchedulingWidget";
 import { calculateLeadScore, formatSlotDate } from "../utils/leadScoring";
 
@@ -257,14 +256,6 @@ export default function FreeEstimatePage() {
                 </>
               )}
             </ol>
-            <p className="text-[var(--foreground-muted)] mb-6">
-              Need to talk sooner? Give us a call:
-            </p>
-            <PhoneLink
-              location="estimate-thank-you"
-              className="inline-flex items-center gap-2 text-[var(--golden-amber-dark)] font-semibold text-lg"
-              iconClassName="w-5 h-5"
-            />
           </div>
         </section>
       </>
