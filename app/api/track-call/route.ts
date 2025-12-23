@@ -73,7 +73,8 @@ export async function POST(request: Request) {
     // =====================================================
     if (process.env.SLACK_WEBHOOK_URL) {
       try {
-        const slackBlocks = [
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const slackBlocks: any[] = [
           {
             type: "header",
             text: {
@@ -128,7 +129,7 @@ export async function POST(request: Request) {
                 text: `📊 *Campaign:* ${utm_campaign || "—"} | *Term:* ${utm_term || "—"} | *Content:* ${utm_content || "—"}`,
               },
             ],
-          } as typeof slackBlocks[number]);
+          });
         }
 
         await fetch(process.env.SLACK_WEBHOOK_URL, {

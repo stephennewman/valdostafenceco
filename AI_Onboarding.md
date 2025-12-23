@@ -72,6 +72,16 @@ LEADS_EMAIL=<your_business_email>
 ## Activity Log
 
 ### Tuesday, December 23, 2025 - Time TBD
+**Deploy #12 - SEO: Descriptive Alt Text for Gallery Images**
+- **Feature**: Added unique, keyword-rich alt text to all 12 gallery images
+- **SEO Impact**: Enables ranking in Google Images for searches like "wood fence Valdosta", "privacy fence Georgia"
+- **Before**: All images had `alt="Fence project"` (duplicate, non-descriptive)
+- **After**: Each image has unique alt text with location + service keywords
+- **Files Updated**:
+  - `app/gallery/page.tsx` - Added alt property to projects array, updated Image component
+- Commit: c4232ff
+
+### Tuesday, December 23, 2025 - Time TBD
 **Deploy #11 - Enhanced Phone CTA Tracking with Rich Metadata**
 - **Feature**: Comprehensive metadata capture for phone click analytics
 - **New Data Points**:
