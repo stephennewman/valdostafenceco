@@ -72,6 +72,20 @@ LEADS_EMAIL=<your_business_email>
 ## Activity Log
 
 ### Tuesday, December 23, 2025 - Time TBD
+**Deploy #16 - Gallery Images on Homepage & About Page**
+- **New Section**: Added "Recent Work" gallery preview on homepage with 4 featured project images
+- **Homepage Service Areas**: Replaced abstract circle design with actual fence project image
+- **About Page**: Replaced "Team Photo Coming Soon" placeholder with project image
+- **Images Used**:
+  - Homepage gallery: valdostafenceco_1, 3, 5, 7
+  - Service areas: valdostafenceco_2
+  - About page: valdostafenceco_4
+- **Files Updated**:
+  - `app/page.tsx` - Added Image import, featuredProjects array, Recent Work section, updated Service Areas
+  - `app/about/page.tsx` - Replaced placeholder with real image
+- Commit: 340d5f1
+
+### Tuesday, December 23, 2025 - Time TBD
 **Deploy #15 - Email Address Update**
 - **Change**: Replaced `info@valdostafenceco.com` → `stephen@valdostafenceco.com`
 - **Files Updated** (5 files, 8 occurrences):

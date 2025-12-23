@@ -242,7 +242,7 @@ export default function Home() {
                   Service Area
                 </span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-[var(--font-serif)] text-white/80 mb-4">
+              <h2 className="text-3xl sm:text-4xl font-[var(--font-serif)] text-white mb-4">
                 Proudly Serving Valdosta & 25 Miles Surrounding
               </h2>
               <p className="text-white/90 mb-8 leading-relaxed">
