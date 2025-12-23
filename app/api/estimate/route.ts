@@ -83,6 +83,77 @@ export async function POST(request: Request) {
     }
 
     // =====================================================
+    // SLACK NOTIFICATION
+    // =====================================================
+    if (process.env.SLACK_WEBHOOK_URL) {
+      try {
+        const fenceTypesList = Array.isArray(fenceTypes)
+          ? fenceTypes.join(", ")
+          : fenceTypes || "Not specified";
+        
+        const priorityEmoji = leadPriority === "high" ? "🔥" : leadPriority === "medium" ? "⚡" : "📋";
+        const appointmentText = scheduledDate && scheduledTime 
+          ? `\n📅 *Appointment:* ${scheduledDate} at ${scheduledTime}` 
+          : "";
+        
+        await fetch(process.env.SLACK_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            text: `${priorityEmoji} New Estimate Request from ${name}`,
+            blocks: [
+              {
+                type: "header",
+                text: {
+                  type: "plain_text",
+                  text: `${priorityEmoji} New Free Estimate Request!`,
+                  emoji: true,
+                },
+              },
+              {
+                type: "section",
+                text: {
+                  type: "mrkdwn",
+                  text: `*${name}* in ${city || "Valdosta"}\n📞 ${phone}${email ? `\n✉️ ${email}` : ""}${appointmentText}`,
+                },
+              },
+              {
+                type: "section",
+                fields: [
+                  {
+                    type: "mrkdwn",
+                    text: `*Fence Type:*\n${fenceTypesList}`,
+                  },
+                  {
+                    type: "mrkdwn",
+                    text: `*Timeline:*\n${timeline || "Not specified"}`,
+                  },
+                  {
+                    type: "mrkdwn",
+                    text: `*Length:*\n${fenceLength || "Not specified"}`,
+                  },
+                  {
+                    type: "mrkdwn",
+                    text: `*Score:*\n${leadScore || 0}/100 (${leadPriority || "low"})`,
+                  },
+                ],
+              },
+              ...(notes ? [{
+                type: "section",
+                text: {
+                  type: "mrkdwn",
+                  text: `*Notes:* ${notes}`,
+                },
+              }] : []),
+            ],
+          }),
+        });
+      } catch (slackError) {
+        console.error("Slack notification failed:", slackError);
+      }
+    }
+
+    // =====================================================
     // SEND EMAILS
     // =====================================================
     

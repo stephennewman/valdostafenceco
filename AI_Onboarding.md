@@ -71,6 +71,20 @@ LEADS_EMAIL=<your_business_email>
 
 ## Activity Log
 
+### Tuesday, December 23, 2025 - Time TBD
+**Deploy #9 - Phone CTA Click Notifications (Slack + Email)**
+- **Feature**: Real-time notifications when someone clicks a phone CTA
+- **Slack Integration**: Optional Slack webhook sends instant notifications with click location, time, source page
+- **Email Notifications**: Uses existing Resend setup to send email alerts
+- **Tracking Data**: Location (header, footer, hero, etc.), timestamp, source page URL, user agent
+- **Implementation**: Fire-and-forget API call - won't delay or interfere with phone calls
+- **New Environment Variable**: `SLACK_WEBHOOK_URL` (optional) for Slack notifications
+- **Files Added**:
+  - `app/api/track-call/route.ts` - API endpoint for notifications
+- **Files Updated**:
+  - `app/components/PhoneLink.tsx` - Now calls track-call API on click
+- Commit: 75afef7
+
 ### Tuesday, December 23, 2025 - 12:30 AM EST
 **Deploy #8 - Supabase Integration: Lead Database**
 - **Feature**: Connected to Supabase for persistent lead storage and tracking
