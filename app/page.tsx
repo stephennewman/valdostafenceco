@@ -306,6 +306,7 @@ export default function Home() {
                 rating={testimonial.rating}
                 text={testimonial.text}
                 service={testimonial.service}
+                avatar={testimonial.avatar}
               />
             ))}
           </div>

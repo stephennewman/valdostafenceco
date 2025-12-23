@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Star, Quote } from "lucide-react";
 
 interface TestimonialCardProps {
@@ -6,6 +7,7 @@ interface TestimonialCardProps {
   rating: number;
   text: string;
   service?: string;
+  avatar?: string;
 }
 
 export default function TestimonialCard({
@@ -14,6 +16,7 @@ export default function TestimonialCard({
   rating,
   text,
   service,
+  avatar,
 }: TestimonialCardProps) {
   return (
     <div className="bg-white rounded-sm p-6 border border-[var(--border)] h-full flex flex-col">
@@ -42,14 +45,25 @@ export default function TestimonialCard({
       </p>
 
       {/* Author */}
-      <div className="border-t border-[var(--border)] pt-4">
-        <p className="font-semibold text-[var(--charcoal-dark)] text-sm">{name}</p>
-        <p className="text-xs text-[var(--gray)]">{location}</p>
-        {service && (
-          <p className="text-xs text-[var(--red)] mt-1">
-            {service}
-          </p>
+      <div className="border-t border-[var(--border)] pt-4 flex items-center gap-3">
+        {avatar && (
+          <Image
+            src={avatar}
+            alt={name}
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
         )}
+        <div>
+          <p className="font-semibold text-[var(--charcoal-dark)] text-sm">{name}</p>
+          <p className="text-xs text-[var(--gray)]">{location}</p>
+          {service && (
+            <p className="text-xs text-[var(--red)] mt-0.5">
+              {service}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

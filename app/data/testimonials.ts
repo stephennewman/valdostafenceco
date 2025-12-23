@@ -6,6 +6,7 @@ export interface Testimonial {
   text: string;
   service: string;
   date?: string;
+  avatar?: string;
 }
 
 export const testimonials: Testimonial[] = [
@@ -17,6 +18,7 @@ export const testimonials: Testimonial[] = [
     text: "Absolutely thrilled with our new privacy fence! The team was professional, showed up on time, and finished ahead of schedule. Our backyard finally feels like a private retreat. Highly recommend Valdosta Fence Co. to anyone looking for quality work.",
     service: "Privacy Fence Installation",
     date: "2024-11",
+    avatar: "https://i.pravatar.cc/150?img=32",
   },
   {
     id: 2,
@@ -26,6 +28,7 @@ export const testimonials: Testimonial[] = [
     text: "Had them install a vinyl fence around our pool. They knew all the code requirements and handled everything including the permit. The fence looks beautiful and I know my grandkids are safe. Great experience from start to finish.",
     service: "Pool Fence Installation",
     date: "2024-10",
+    avatar: "https://i.pravatar.cc/150?img=12",
   },
   {
     id: 3,
@@ -35,6 +38,7 @@ export const testimonials: Testimonial[] = [
     text: "After a storm took out part of our fence, Valdosta Fence Co. came out the next day to assess the damage. They repaired everything within a week and matched our existing fence perfectly. Fair price and honest service.",
     service: "Fence Repair",
     date: "2024-09",
+    avatar: "https://i.pravatar.cc/150?img=59",
   },
   {
     id: 4,
@@ -44,6 +48,7 @@ export const testimonials: Testimonial[] = [
     text: "Best fence company in Valdosta, hands down. I got quotes from three companies and they were the most detailed and transparent. The cedar fence they installed is absolutely gorgeous. My neighbors keep asking who did the work!",
     service: "Wood Fence Installation",
     date: "2024-08",
+    avatar: "https://i.pravatar.cc/150?img=68",
   },
   {
     id: 5,
@@ -53,6 +58,7 @@ export const testimonials: Testimonial[] = [
     text: "Even though we're out in Quitman, they treated us like we were right next door. Professional crew, quality materials, and they cleaned up everything when done. Our aluminum fence looks like it belongs in a magazine.",
     service: "Aluminum Fence Installation",
     date: "2024-07",
+    avatar: "https://i.pravatar.cc/150?img=47",
   },
   {
     id: 6,
@@ -62,6 +68,7 @@ export const testimonials: Testimonial[] = [
     text: "Had 20 acres that needed fencing for cattle. They gave me a fair quote, used quality materials, and finished the job in great time. The fence is solid and my cattle aren't going anywhere. Will use them again for sure.",
     service: "Farm & Ranch Fencing",
     date: "2024-06",
+    avatar: "https://i.pravatar.cc/150?img=53",
   },
   {
     id: 7,
@@ -71,6 +78,7 @@ export const testimonials: Testimonial[] = [
     text: "We needed a fence ASAP before bringing our new puppy home. They squeezed us in and installed a beautiful chain link fence in just two days. Our pup loves his new yard and we love the peace of mind. Thank you!",
     service: "Chain Link Fence",
     date: "2024-05",
+    avatar: "https://i.pravatar.cc/150?img=23",
   },
   {
     id: 8,
@@ -80,6 +88,7 @@ export const testimonials: Testimonial[] = [
     text: "Hired them to fence our warehouse property with security fencing and an automated gate. Very professional, handled all permits, and completed on schedule. The gate system works flawlessly. Excellent commercial work.",
     service: "Commercial Fencing",
     date: "2024-04",
+    avatar: "https://i.pravatar.cc/150?img=60",
   },
   {
     id: 9,
@@ -89,6 +98,7 @@ export const testimonials: Testimonial[] = [
     text: "We had an old rotting fence that was an eyesore. Valdosta Fence Co. removed it and installed a gorgeous new wood privacy fence that completely transformed our backyard. The crew was respectful, efficient, and left our yard spotless. Worth every penny!",
     service: "Privacy Fence Installation",
     date: "2024-03",
+    avatar: "https://i.pravatar.cc/150?img=44",
   },
 ];
 

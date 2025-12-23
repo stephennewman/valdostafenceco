@@ -67,6 +67,7 @@ export default function ReviewsPage() {
                 rating={testimonial.rating}
                 text={testimonial.text}
                 service={testimonial.service}
+                avatar={testimonial.avatar}
               />
             ))}
           </div>
