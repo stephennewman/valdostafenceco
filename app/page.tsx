@@ -9,12 +9,20 @@ import {
   Clock,
   CheckCircle,
 } from "lucide-react";
+import Image from "next/image";
 import HeroSection from "./components/HeroSection";
 import ServiceCard from "./components/ServiceCard";
 import TestimonialCard from "./components/TestimonialCard";
 import CTAButton from "./components/CTAButton";
 import PhoneLink from "./components/PhoneLink";
 import { getFeaturedTestimonials } from "./data/testimonials";
+
+const featuredProjects = [
+  { image: "/valdostafenceco_1.png", alt: "Wood privacy fence installation in Valdosta GA" },
+  { image: "/valdostafenceco_5.png", alt: "Privacy fence for residential property" },
+  { image: "/valdostafenceco_3.png", alt: "Custom cedar fence construction" },
+  { image: "/valdostafenceco_7.png", alt: "Backyard fence installation South Georgia" },
+];
 
 const featuredServices = [
   {
@@ -179,6 +187,50 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Recent Work Section */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <span className="w-8 h-px bg-[var(--red)]" />
+              <span className="text-[var(--red)] font-semibold text-sm uppercase tracking-wider">
+                Recent Work
+              </span>
+              <span className="w-8 h-px bg-[var(--red)]" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-[var(--font-serif)] text-[var(--charcoal-dark)] mb-4">
+              See Our Craftsmanship
+            </h2>
+            <p className="text-[var(--gray)] leading-relaxed">
+              Quality you can see. Browse some of our recent fence installations throughout South Georgia.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {featuredProjects.map((project, index) => (
+              <div
+                key={index}
+                className="group relative aspect-square rounded-sm overflow-hidden"
+              >
+                <Image
+                  src={project.image}
+                  alt={project.alt}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <CTAButton href="/gallery" variant="outline">
+              View Full Gallery
+            </CTAButton>
+          </div>
+        </div>
+      </section>
+
       {/* Service Areas Section */}
       <section className="py-20 lg:py-28 bg-[var(--charcoal-deep)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -213,24 +265,14 @@ export default function Home() {
               </CTAButton>
             </div>
 
-            <div className="relative">
-              {/* Service area visual */}
-              <div className="aspect-square max-w-sm mx-auto relative">
-                <div className="absolute inset-0 rounded-full border-2 border-white/10" />
-                <div className="absolute inset-8 rounded-full border border-white/20" />
-                <div className="absolute inset-16 rounded-full border border-white/30" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 rounded-full bg-[var(--red)] flex items-center justify-center">
-                    <MapPin className="w-8 h-8 text-white" />
-                  </div>
-                </div>
-                <span className="absolute top-2 left-1/2 -translate-x-1/2 text-white/50 text-xs">
-                  25 miles
-                </span>
-                <span className="absolute bottom-1/3 left-1/2 -translate-x-1/2 text-white font-semibold text-sm">
-                  Valdosta
-                </span>
-              </div>
+            <div className="relative aspect-[4/3] rounded-sm overflow-hidden">
+              <Image
+                src="/valdostafenceco_2.png"
+                alt="Residential fence installation in South Georgia"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--charcoal-deep)]/30 to-transparent" />
             </div>
           </div>
         </div>

@@ -72,6 +72,17 @@ LEADS_EMAIL=<your_business_email>
 ## Activity Log
 
 ### Tuesday, December 23, 2025 - Time TBD
+**Deploy #15 - Email Address Update**
+- **Change**: Replaced `info@valdostafenceco.com` → `stephen@valdostafenceco.com`
+- **Files Updated** (5 files, 8 occurrences):
+  - `app/api/contact/route.ts` - fallback email
+  - `app/contact/page.tsx` - contact page display
+  - `app/components/MobileNav.tsx` - mobile nav email link
+  - `app/components/LocalBusinessSchema.tsx` - structured data
+  - `app/components/Footer.tsx` - footer email link
+- Commit: 3cc574c
+
+### Tuesday, December 23, 2025 - Time TBD
 **Deploy #14 - Disable Email Notifications (Slack Only)**
 - **Change**: Turned OFF email notifications for phone CTA clicks and estimate requests
 - **Kept Active**: 

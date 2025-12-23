@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import { Users, Award, MapPin, Heart, Shield, Clock } from "lucide-react";
+import { Award, MapPin, Heart, Shield, Clock } from "lucide-react";
+import Image from "next/image";
 import HeroSection from "../components/HeroSection";
 import CTAButton from "../components/CTAButton";
 
@@ -88,16 +89,13 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className="relative">
-              {/* Placeholder for team/company image */}
-              <div className="aspect-[4/3] bg-[var(--background-alt)] rounded-sm flex items-center justify-center border border-[var(--border)]">
-                <div className="text-center p-8">
-                  <Users className="w-16 h-16 text-[var(--gray)] mx-auto mb-4" />
-                  <span className="text-[var(--gray)]">
-                    Team Photo Coming Soon
-                  </span>
-                </div>
-              </div>
+            <div className="relative aspect-[4/3] rounded-sm overflow-hidden">
+              <Image
+                src="/valdostafenceco_4.png"
+                alt="Valdosta Fence Co. professional fence installation"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
