@@ -83,6 +83,57 @@ export function calculateLeadScore(formData: FormData): LeadScore {
   return { score, priority, availabilityWindow, estimatedValue };
 }
 
+// US Federal Holidays for 2024-2026 (add more years as needed)
+// Format: "YYYY-MM-DD"
+const HOLIDAYS: string[] = [
+  // 2024
+  "2024-01-01", // New Year's Day
+  "2024-01-15", // MLK Day
+  "2024-02-19", // Presidents Day
+  "2024-05-27", // Memorial Day
+  "2024-07-04", // Independence Day
+  "2024-09-02", // Labor Day
+  "2024-11-28", // Thanksgiving
+  "2024-11-29", // Day after Thanksgiving
+  "2024-12-24", // Christmas Eve
+  "2024-12-25", // Christmas
+  "2024-12-31", // New Year's Eve
+  // 2025
+  "2025-01-01", // New Year's Day
+  "2025-01-20", // MLK Day
+  "2025-02-17", // Presidents Day
+  "2025-05-26", // Memorial Day
+  "2025-07-04", // Independence Day
+  "2025-09-01", // Labor Day
+  "2025-11-27", // Thanksgiving
+  "2025-11-28", // Day after Thanksgiving
+  "2025-12-24", // Christmas Eve
+  "2025-12-25", // Christmas
+  "2025-12-31", // New Year's Eve
+  // 2026
+  "2026-01-01", // New Year's Day
+  "2026-01-19", // MLK Day
+  "2026-02-16", // Presidents Day
+  "2026-05-25", // Memorial Day
+  "2026-07-03", // Independence Day (observed)
+  "2026-09-07", // Labor Day
+  "2026-11-26", // Thanksgiving
+  "2026-11-27", // Day after Thanksgiving
+  "2026-12-24", // Christmas Eve
+  "2026-12-25", // Christmas
+  "2026-12-31", // New Year's Eve
+];
+
+function isHoliday(date: Date): boolean {
+  const dateStr = date.toISOString().split('T')[0];
+  return HOLIDAYS.includes(dateStr);
+}
+
+function isWeekday(date: Date): boolean {
+  const day = date.getDay();
+  return day >= 1 && day <= 5; // Monday (1) through Friday (5)
+}
+
 // Generate available time slots based on priority
 export function getAvailableSlots(availabilityWindow: 'this_week' | 'next_week' | 'two_weeks'): Date[] {
   const slots: Date[] = [];
@@ -90,31 +141,38 @@ export function getAvailableSlots(availabilityWindow: 'this_week' | 'next_week' 
   today.setHours(0, 0, 0, 0);
 
   let startDay: number;
-  let endDay: number;
+  let maxSlots: number;
 
   switch (availabilityWindow) {
     case 'this_week':
       startDay = 1;  // Tomorrow
-      endDay = 5;    // Within 5 days
+      maxSlots = 5;  // Show 5 available weekdays
       break;
     case 'next_week':
       startDay = 5;  // 5 days out
-      endDay = 12;   // Within ~2 weeks
+      maxSlots = 8;  // Show 8 available weekdays
       break;
     case 'two_weeks':
       startDay = 14; // 2 weeks out
-      endDay = 28;   // Within a month
+      maxSlots = 10; // Show 10 available weekdays
       break;
   }
 
-  for (let i = startDay; i <= endDay; i++) {
+  let daysChecked = 0;
+  let i = startDay;
+  
+  // Keep adding days until we have enough slots (max 60 days lookahead)
+  while (slots.length < maxSlots && daysChecked < 60) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
     
-    // Skip Sundays (day 0)
-    if (date.getDay() !== 0) {
+    // Only add weekdays (Mon-Fri) that aren't holidays
+    if (isWeekday(date) && !isHoliday(date)) {
       slots.push(date);
     }
+    
+    i++;
+    daysChecked++;
   }
 
   return slots;

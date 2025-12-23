@@ -96,10 +96,6 @@ export default function FreeEstimatePage() {
     setStep(6); // Move to contact info
   };
 
-  const handleSkipScheduling = () => {
-    setStep(6); // Move to contact info without scheduling
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -474,7 +470,6 @@ export default function FreeEstimatePage() {
                   <SchedulingWidget
                     leadScore={leadScore}
                     onSchedule={handleSchedule}
-                    onSkip={handleSkipScheduling}
                   />
                 </div>
               )}

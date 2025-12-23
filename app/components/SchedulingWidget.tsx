@@ -12,13 +12,11 @@ import {
 interface SchedulingWidgetProps {
   leadScore: LeadScore;
   onSchedule: (date: Date, timeSlot: string) => void;
-  onSkip: () => void;
 }
 
 export default function SchedulingWidget({
   leadScore,
   onSchedule,
-  onSkip,
 }: SchedulingWidgetProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -188,13 +186,6 @@ export default function SchedulingWidget({
         >
           <Calendar className="w-5 h-5" />
           Confirm Appointment
-        </button>
-        <button
-          type="button"
-          onClick={onSkip}
-          className="px-6 py-3 text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors text-sm"
-        >
-          Skip – Call me instead
         </button>
       </div>
 
