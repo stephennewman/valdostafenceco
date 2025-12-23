@@ -72,6 +72,15 @@ LEADS_EMAIL=<your_business_email>
 ## Activity Log
 
 ### Tuesday, December 23, 2025 - Time TBD
+**Deploy #10 - Slack Notifications for Free Estimate Submissions**
+- **Feature**: Slack alerts for new estimate form submissions
+- **Notification Includes**: Name, phone, email, city, fence type, timeline, length, lead score, scheduled appointment
+- **Priority Indicators**: 🔥 High, ⚡ Medium, 📋 Standard
+- **Files Updated**:
+  - `app/api/estimate/route.ts` - Added Slack webhook integration
+- Commit: 090fe52
+
+### Tuesday, December 23, 2025 - Time TBD
 **Deploy #9 - Phone CTA Click Notifications (Slack + Email)**
 - **Feature**: Real-time notifications when someone clicks a phone CTA
 - **Slack Integration**: Optional Slack webhook sends instant notifications with click location, time, source page

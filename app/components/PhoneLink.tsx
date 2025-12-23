@@ -38,6 +38,33 @@ export default function PhoneLink({
 
     // Send notification (fire-and-forget, won't delay call)
     if (typeof window !== "undefined") {
+      // Parse UTM parameters for marketing attribution
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmParams = {
+        utm_source: urlParams.get("utm_source"),
+        utm_medium: urlParams.get("utm_medium"),
+        utm_campaign: urlParams.get("utm_campaign"),
+        utm_term: urlParams.get("utm_term"),
+        utm_content: urlParams.get("utm_content"),
+        gclid: urlParams.get("gclid"), // Google Ads click ID
+        fbclid: urlParams.get("fbclid"), // Facebook click ID
+      };
+
+      // Detect device type
+      const screenWidth = window.screen.width;
+      const isMobile = screenWidth < 768;
+      const isTablet = screenWidth >= 768 && screenWidth < 1024;
+      const deviceType = isMobile ? "mobile" : isTablet ? "tablet" : "desktop";
+
+      // Get session duration (time on site)
+      const sessionStart = sessionStorage.getItem("vfc_session_start");
+      let sessionDuration = 0;
+      if (sessionStart) {
+        sessionDuration = Math.round((Date.now() - parseInt(sessionStart)) / 1000);
+      } else {
+        sessionStorage.setItem("vfc_session_start", Date.now().toString());
+      }
+
       fetch("/api/track-call", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -45,8 +72,15 @@ export default function PhoneLink({
           location,
           phoneNumber,
           timestamp: new Date().toISOString(),
-          referrer: window.location.href,
+          currentPage: window.location.href,
+          originalReferrer: document.referrer || "direct",
           userAgent: navigator.userAgent,
+          deviceType,
+          screenSize: `${window.screen.width}x${window.screen.height}`,
+          viewport: `${window.innerWidth}x${window.innerHeight}`,
+          language: navigator.language,
+          sessionDurationSeconds: sessionDuration,
+          ...utmParams,
         }),
       }).catch(() => {
         // Silently fail - don't affect user experience
