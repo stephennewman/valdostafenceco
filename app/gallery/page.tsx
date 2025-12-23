@@ -17,7 +17,6 @@ const projects = [
   { id: 9, image: "/valdostafenceco_9.png", alt: "Fence repair and replacement project Lake Park GA" },
   { id: 10, image: "/valdostafenceco_10.png", alt: "New fence installation residential Valdosta Georgia" },
   { id: 11, image: "/valdostafenceco_11.png", alt: "Quality fence craftsmanship South Georgia contractor" },
-  { id: 12, image: "/valdostafenceco.png", alt: "Valdosta Fence Co completed fence project" },
 ];
 
 export default function GalleryPage() {
